@@ -1,0 +1,19 @@
+.nav {
+  background-color: royalblue;
+  padding: 20px 50px;
+}
+
+.nav .list_nav {
+  display: flex;
+  justify-content: right;
+  gap: 16px;
+}
+
+.nav .title {
+  color: #ffffff;
+}
+
+.nav a {
+  color: #ffffff;
+  text-decoration: none;
+}
