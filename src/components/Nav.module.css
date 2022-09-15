@@ -6,6 +6,7 @@
 .nav .list_nav {
   display: flex;
   justify-content: right;
+  align-items: center;
   gap: 16px;
 }
 
@@ -16,4 +17,13 @@
 .nav a {
   color: #ffffff;
   text-decoration: none;
+}
+
+.nav button {
+  padding: 6px 12px;
+  border-radius: 10px;
+  background-color: teal;
+  border: none;
+  color: #fff;
+  cursor: pointer;
 }
