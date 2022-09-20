@@ -1,6 +1,7 @@
 .nav {
   background-color: royalblue;
   padding: 20px 50px;
+  height: 12vh;
 }
 
 .nav .list_nav {
@@ -26,4 +27,5 @@
   border: none;
   color: #fff;
   cursor: pointer;
+  margin-left: 10px;
 }
