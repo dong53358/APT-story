@@ -1,6 +1,6 @@
-import { collection } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { useReducer } from "react";
-import { appFireStore } from "../firebase/config";
+import { appFireStore, timestamp } from "../firebase/config";
 
 const iniState = {
   document: null,
@@ -11,6 +11,22 @@ const iniState = {
 
 const storeReducer = (state, action) => {
   switch (action.type) {
+    case "isPending":
+      return { ispending: true, document: null, success: false, error: null };
+    case "addDoc":
+      return {
+        ispending: false,
+        document: action.payload,
+        success: true,
+        error: null,
+      };
+    case "error":
+      return {
+        ispending: false,
+        document: null,
+        success: false,
+        error: action.payload,
+      };
     default:
       return state;
   }
@@ -24,7 +40,17 @@ export const useFirestore = (transaction) => {
   const colRef = collection(appFireStore, transaction);
 
   // 컬렉션에 문서를 추가합니다.
-  const addDocument = () => {};
+  const addDocument = async (doc) => {
+    dispatch({ type: "isPending" });
+    try {
+      const createdTime = timestamp.fromDate(new Date());
+      const docRef = await addDoc(colRef, { ...doc, createdTime });
+      console.log(docRef);
+      dispatch({ type: "addDoc", payload: docRef });
+    } catch (error) {
+      dispatch({ type: "error", payload: error.message });
+    }
+  };
 
   // 컬렉션에서 문서를 제거합니다.
   const deleteDocument = (id) => {};
