@@ -1,12 +1,17 @@
 .cont {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  max-width: 960px;
-  margin: 60px auto;
-  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 98vw;
+  margin-top: 30px;
+}
+
+.side_menu {
+  width: 350px;
 }
 
 .side_menu form {
+  width: 100%;
   padding: 20px;
   background-color: teal;
   border-radius: 10px;
@@ -38,7 +43,7 @@
 }
 
 .side_menu textarea {
-  height: 200px;
+  height: 150px;
   width: 100%;
   border-radius: 5px;
 }
@@ -46,7 +51,7 @@
 .side_menu button {
   display: block;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 30px;
   padding: 10px 15px;
   border-radius: 5px;
   background-color: transparent;
@@ -55,7 +60,8 @@
 }
 
 .content_list {
-  margin: 0;
+  width: 350px;
+  -webkit-padding-start: 0px;
 }
 
 .content_list li {
@@ -77,6 +83,9 @@
   font-size: 1.3em;
 }
 
+.content_list p {
+  word-break: break-all;
+}
 .content_list button {
   position: absolute;
   top: 0;
@@ -84,5 +93,5 @@
   background-color: teal;
   border: none;
   color: #fff;
-  padding: 12px 8px;
+  padding: 8px;
 }
