@@ -1,1 +1,1 @@
-# react + firebase => diary
+# react + firebase =>my-diary
