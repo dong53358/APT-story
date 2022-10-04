@@ -1,7 +1,9 @@
 .nav {
+  display: flex;
+  flex-direction: column;
   background-color: royalblue;
-  padding: 20px 50px;
-  height: 15vh;
+  padding: 0px 50px;
+  height: 16vh;
 }
 
 .nav .list_nav {
@@ -28,4 +30,8 @@
   color: #fff;
   cursor: pointer;
   margin-left: 10px;
+}
+
+.toDo {
+  font-size: 20px;
 }

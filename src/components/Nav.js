@@ -11,6 +11,13 @@ export default function Nav() {
       <h1 className={styles.title}>
         <Link to="/">My Diary</Link>
       </h1>
+      <div>
+        {user && (
+          <div className={styles.toDo}>
+            <Link to="/todo">ToDolist</Link>
+          </div>
+        )}
+      </div>
       <ul className={styles.list_nav}>
         {!user && (
           <>
