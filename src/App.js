@@ -4,7 +4,7 @@ import { useAuthContext } from "./hooks/useAuthContext";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
-import ToDoList from "./pages/toDoList/ToDoList";
+import ToDo from "./pages/toDo/ToDo";
 
 function App() {
   const { isAuthReady, user } = useAuthContext();
@@ -31,7 +31,7 @@ function App() {
             <Route
               path="/todo"
               element={
-                user ? <ToDoList /> : <Navigate replace={true} to="/login" />
+                user ? <ToDo /> : <Navigate replace={true} to="/login" />
               }
             ></Route>
           </Routes>
