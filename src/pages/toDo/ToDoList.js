@@ -1,5 +1,6 @@
 import { useFirestore } from "../../hooks/useFirestore";
 import styles from "./ToDo.module.css";
+import { FaTrashAlt } from "react-icons/fa";
 
 export default function ToDoList({ diaries }) {
   const { deleteDocument } = useFirestore("todo");
@@ -15,7 +16,7 @@ export default function ToDoList({ diaries }) {
                 deleteDocument(item.id);
               }}
             >
-              삭제
+              <FaTrashAlt />
             </button>
           </li>
         );

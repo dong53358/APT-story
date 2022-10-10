@@ -31,8 +31,7 @@ export default function ToDoForm({ uid }) {
     <>
       <form onSubmit={handleSubmit}>
         <fieldset>
-          <legend>Add To Do</legend>
-          <label htmlFor="tit">to do :</label>
+          <legend>To Do list</legend>
           <input
             value={title}
             id="tit"
@@ -40,8 +39,7 @@ export default function ToDoForm({ uid }) {
             required
             onChange={handleDate}
           />
-
-          <button type="submit">추가하기</button>
+          <button type="submit">Add</button>
         </fieldset>
       </form>
     </>

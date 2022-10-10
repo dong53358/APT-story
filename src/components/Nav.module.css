@@ -2,8 +2,9 @@
   display: flex;
   flex-direction: column;
   background-color: royalblue;
-  padding: 0px 50px;
+  padding: 0px 40px;
   height: 16vh;
+  width: 100%;
 }
 
 .nav .list_nav {
@@ -34,4 +35,37 @@
 
 .toDo {
   font-size: 20px;
+}
+
+.nav_menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background-color: #f6f6f6;
+}
+.nav_menu a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 1);
+  width: 100%;
+}
+
+.nav_menu_li_click {
+  width: 100%;
+  padding: 15px;
+  border-top: 1px solid rgba(1, 1, 1, 0.3);
+  border-bottom: 1px solid rgba(1, 1, 1, 0.3);
+  font-size: 13px;
+  border-right: 3px solid #7ca4c8;
+
+  color: #7ca4c8;
+}
+
+.nav_menu_li {
+  width: 100%;
+  padding: 15px;
+  border-top: 1px solid rgba(1, 1, 1, 0.3);
+  border-bottom: 1px solid rgba(1, 1, 1, 0.3);
+  font-size: 13px;
+  color: black;
 }
