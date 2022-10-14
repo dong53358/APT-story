@@ -1,4 +1,10 @@
-import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 import { useReducer } from "react";
 import { appFireStore, timestamp } from "../firebase/config";
 
@@ -28,6 +34,13 @@ const storeReducer = (state, action) => {
         error: action.payload,
       };
     case "deleteDoc":
+      return {
+        ispending: false,
+        document: action.payload,
+        success: true,
+        error: null,
+      };
+    case "updateDoc":
       return {
         ispending: false,
         document: action.payload,
@@ -69,5 +82,19 @@ export const useFirestore = (transaction) => {
     }
   };
 
-  return { addDocument, deleteDocument, response };
+  // 컬렉션에서 문서를 수정합니다.
+  const updateDocument = async (id) => {
+    dispatch({ type: "isPending" });
+    try {
+      const docRef = await updateDoc(doc(colRef, id), {
+        //isClicked: isClicked ? false : true,
+        isClicked: true,
+      });
+      dispatch({ type: "updateDoc", payload: docRef });
+    } catch (error) {
+      dispatch({ type: "error", payload: error.message });
+    }
+  };
+
+  return { addDocument, deleteDocument, updateDocument, response };
 };

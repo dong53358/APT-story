@@ -3,12 +3,21 @@ import styles from "./ToDo.module.css";
 import { FaTrashAlt } from "react-icons/fa";
 
 export default function ToDoList({ diaries }) {
-  const { deleteDocument } = useFirestore("todo");
+  const { deleteDocument, updateDocument } = useFirestore("todo");
+
+  console.log(diaries);
   return (
     <>
       {diaries.map((item) => {
         return (
-          <li key={item.id}>
+          <li
+            className={item.isClicked ? styles.todoDone : styles.todoDoing}
+            key={item.id}
+            onClick={() => {
+              updateDocument(item.id);
+              console.log(item.isClicked);
+            }}
+          >
             <strong className={styles.title}>{item.title}</strong>
             <button
               type="button"

@@ -3,28 +3,24 @@ import { useFirestore } from "../../hooks/useFirestore";
 
 export default function ToDoForm({ uid }) {
   const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
   const { addDocument, response } = useFirestore("todo");
 
   const handleDate = (event) => {
     if (event.target.id === "tit") {
       setTitle(event.target.value);
-    } else if (event.target.id === "txt") {
-      setText(event.target.value);
     }
   };
 
   useEffect(() => {
     if (response.success) {
       setTitle("");
-      setText("");
     }
   }, [response.success]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(title, text);
-    addDocument({ uid, title, text });
+    addDocument({ uid, title, isClicked });
   };
 
   return (

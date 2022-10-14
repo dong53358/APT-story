@@ -7,6 +7,7 @@ import styles from "./ToDo.module.css";
 function ToDo() {
   const { user } = useAuthContext();
   const { documents, error } = useCollection("todo", ["uid", "==", user.uid]);
+  console.log(documents);
   return (
     <>
       <main className={styles.cont}>
