@@ -58,7 +58,6 @@ export const useFirestore = (transaction) => {
 
   // colRef : 컬렉션의 참조를 요구합니다.
   const colRef = collection(appFireStore, transaction);
-
   // 컬렉션에 문서를 추가합니다.
   const addDocument = async (doc) => {
     dispatch({ type: "isPending" });
@@ -83,12 +82,12 @@ export const useFirestore = (transaction) => {
   };
 
   // 컬렉션에서 문서를 수정합니다.
-  const updateDocument = async (id) => {
+  const updateDocument = async (id, isClicked) => {
     dispatch({ type: "isPending" });
     try {
       const docRef = await updateDoc(doc(colRef, id), {
-        //isClicked: isClicked ? false : true,
-        isClicked: true,
+        isClicked: isClicked ? false : true,
+        //isClicked: true,
       });
       dispatch({ type: "updateDoc", payload: docRef });
     } catch (error) {

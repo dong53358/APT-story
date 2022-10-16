@@ -74,6 +74,7 @@
   position: relative;
   border-radius: 5px;
   border-left: 4px solid teal;
+  word-break: break-all;
 }
 
 .content_list li + li {
@@ -90,13 +91,14 @@
   border: none;
   color: black;
   font-size: 20px;
-  padding: 8px;
-}
-
-.todoDone {
-  background-color: red;
+  z-index: 10;
 }
 
 .todoDoing {
-  background-color: yellow;
+  opacity: 1;
+}
+
+.todoDone {
+  opacity: 0.5;
+  text-decoration: line-through;
 }
