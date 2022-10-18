@@ -1,7 +1,7 @@
 .nav {
   display: flex;
   flex-direction: column;
-  background-color: royalblue;
+  background-color: rgb(30, 55, 153);
   padding: 0px 40px;
   height: 16vh;
   width: 100%;
@@ -26,7 +26,7 @@
 .nav button {
   padding: 6px 12px;
   border-radius: 10px;
-  background-color: teal;
+  background-color: rgb(106, 137, 204);
   border: none;
   color: #fff;
   cursor: pointer;

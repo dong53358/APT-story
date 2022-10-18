@@ -4,6 +4,7 @@ import { useFirestore } from "../../hooks/useFirestore";
 export default function ToDoForm({ uid }) {
   const [title, setTitle] = useState("");
   const [isClicked, setIsClicked] = useState(false);
+  const [isEditClicked, setIsEditClicked] = useState(false);
   const { addDocument, response } = useFirestore("todo");
 
   const handleDate = (event) => {
@@ -20,7 +21,7 @@ export default function ToDoForm({ uid }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addDocument({ uid, title, isClicked });
+    addDocument({ uid, title, isClicked, isEditClicked });
   };
 
   return (

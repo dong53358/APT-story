@@ -82,12 +82,11 @@ export const useFirestore = (transaction) => {
   };
 
   // 컬렉션에서 문서를 수정합니다.
-  const updateDocument = async (id, isClicked) => {
+  const updateDocumentCliked = async (id, isClicked) => {
     dispatch({ type: "isPending" });
     try {
       const docRef = await updateDoc(doc(colRef, id), {
         isClicked: isClicked ? false : true,
-        //isClicked: true,
       });
       dispatch({ type: "updateDoc", payload: docRef });
     } catch (error) {
@@ -95,5 +94,37 @@ export const useFirestore = (transaction) => {
     }
   };
 
-  return { addDocument, deleteDocument, updateDocument, response };
+  const updateDocumentEditCliked = async (id, isEditClicked) => {
+    dispatch({ type: "isPending" });
+    try {
+      const docRef = await updateDoc(doc(colRef, id), {
+        isEditClicked: isEditClicked ? false : true,
+      });
+      dispatch({ type: "updateDoc", payload: docRef });
+    } catch (error) {
+      dispatch({ type: "error", payload: error.message });
+    }
+  };
+  // 컬렉션에서 문서를 수정합니다.
+  const updateDocument = async (id, input) => {
+    dispatch({ type: "isPending" });
+    try {
+      const docRef = await updateDoc(doc(colRef, id), {
+        isEditClicked: true,
+        title: input,
+      });
+      dispatch({ type: "updateDoc", payload: docRef });
+    } catch (error) {
+      dispatch({ type: "error", payload: error.message });
+    }
+  };
+
+  return {
+    addDocument,
+    deleteDocument,
+    updateDocument,
+    updateDocumentCliked,
+    updateDocumentEditCliked,
+    response,
+  };
 };
