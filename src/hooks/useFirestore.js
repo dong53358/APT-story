@@ -85,8 +85,10 @@ export const useFirestore = (transaction) => {
   const updateDocumentCliked = async (id, isClicked) => {
     dispatch({ type: "isPending" });
     try {
+      const createdTime = timestamp.fromDate(new Date());
       const docRef = await updateDoc(doc(colRef, id), {
         isClicked: isClicked ? false : true,
+        createdTime,
       });
       dispatch({ type: "updateDoc", payload: docRef });
     } catch (error) {
@@ -105,7 +107,7 @@ export const useFirestore = (transaction) => {
       dispatch({ type: "error", payload: error.message });
     }
   };
-  // 컬렉션에서 문서를 수정합니다.
+
   const updateDocument = async (id, input) => {
     dispatch({ type: "isPending" });
     try {
