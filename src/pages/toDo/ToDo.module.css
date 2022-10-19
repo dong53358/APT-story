@@ -111,6 +111,7 @@
 .todoCheck {
   display: flex;
   font-size: 30px;
+  cursor: pointer;
 }
 
 .editInput {
