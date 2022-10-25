@@ -3,7 +3,6 @@ import { useCollection } from "../../hooks/useCollection";
 import DiaryList from "./DiaryList";
 import DiaryForm from "./DirayFrom";
 import styles from "./Home.module.css";
-import { Image } from "./Image";
 
 export default function Home() {
   const { user } = useAuthContext();
@@ -17,9 +16,6 @@ export default function Home() {
       <ul className={styles.content_list}>
         {error && <strong>{error}</strong>}
         {documents && <DiaryList diaries={documents} />}
-      </ul>
-      <ul>
-        <Image />
       </ul>
     </main>
   );

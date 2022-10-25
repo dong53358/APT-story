@@ -10,6 +10,7 @@ export default function DiaryList({ diaries }) {
           <li key={item.id}>
             <strong className={styles.title}>{item.title}</strong>
             <p className={styles.text}>{item.text}</p>
+            <img className={styles.img} src={item.imageUrl} />
             <button
               type="button"
               onClick={() => {
