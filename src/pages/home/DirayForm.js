@@ -8,13 +8,13 @@ export default function DiaryForm({ uid }) {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState(null);
   const [text, setText] = useState("");
+  const [isEditClicked, setIsEditClicked] = useState(false);
   const { addDocument, response } = useFirestore("diary");
 
   useEffect(() => {
     if (response.success) {
       setTitle("");
       setText("");
-      //setImageUrl("");
     }
   }, [response.success]);
 
@@ -30,11 +30,15 @@ export default function DiaryForm({ uid }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (image == null) {
+      addDocument({ uid, title, text, isEditClicked });
+      return;
+    }
     const imageRef = ref(storage, `images/${image.name + v4()}`);
     let imageUrl = "";
     await uploadBytes(imageRef, image);
     imageUrl = await getDownloadURL(imageRef);
-    addDocument({ uid, title, text, imageUrl });
+    addDocument({ uid, title, text, imageUrl, isEditClicked });
   };
   return (
     <>

@@ -1,6 +1,5 @@
 import styles from "./ToDo.module.css";
 import { useFirestore } from "../../hooks/useFirestore";
-
 import {
   FaCheck,
   FaEdit,
@@ -9,6 +8,7 @@ import {
   FaTrashAlt,
 } from "react-icons/fa";
 import { useRef, useState } from "react";
+
 export default function ToDoItem({ item, doing }) {
   const {
     deleteDocument,

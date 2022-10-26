@@ -1,7 +1,7 @@
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
 import DiaryList from "./DiaryList";
-import DiaryForm from "./DirayFrom";
+import DiaryForm from "./DirayForm";
 import styles from "./Home.module.css";
 
 export default function Home() {

@@ -1,26 +1,10 @@
-import { useFirestore } from "../../hooks/useFirestore";
-import styles from "./Home.module.css";
+import { DiaryItem } from "./DiaryItem";
 
 export default function DiaryList({ diaries }) {
-  const { deleteDocument } = useFirestore("diary");
   return (
     <>
       {diaries.map((item) => {
-        return (
-          <li key={item.id}>
-            <strong className={styles.title}>{item.title}</strong>
-            <p className={styles.text}>{item.text}</p>
-            <img className={styles.img} src={item.imageUrl} />
-            <button
-              type="button"
-              onClick={() => {
-                deleteDocument(item.id);
-              }}
-            >
-              삭제
-            </button>
-          </li>
-        );
+        return <DiaryItem key={item.id} item={item} />;
       })}
     </>
   );
