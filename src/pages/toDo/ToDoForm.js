@@ -3,8 +3,8 @@ import { useFirestore } from "../../hooks/useFirestore";
 
 export default function ToDoForm({ uid }) {
   const [title, setTitle] = useState("");
-  const [isClicked, setIsClicked] = useState(false);
-  const [isEditClicked, setIsEditClicked] = useState(false);
+  const [isClicked] = useState(false);
+  const [isEditClicked] = useState(false);
   const { addDocument, response } = useFirestore("todo");
 
   const handleDate = (event) => {

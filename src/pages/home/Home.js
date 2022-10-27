@@ -7,6 +7,8 @@ import styles from "./Home.module.css";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { useState } from "react";
 import { FaWindowClose } from "react-icons/fa";
+import { HelmetProvider } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 export default function Home() {
   const { user } = useAuthContext();
   const { documents, error } = useCollection("diary", ["uid", "==", user.uid]);
@@ -26,6 +28,11 @@ export default function Home() {
   };
   return (
     <>
+      <HelmetProvider>
+        <Helmet>
+          <title>My diaries</title>
+        </Helmet>
+      </HelmetProvider>
       <main className={styles.cont}>
         <aside className={styles.side_menu}>
           <DiaryForm uid={user.uid}></DiaryForm>
@@ -52,7 +59,7 @@ export default function Home() {
                 top: scrollY.get() + 150,
               }}
             >
-              <img src={imgUrl} />
+              <img src={imgUrl} alt="img" />
               <div onClick={closeBtnClick} className={styles.closeBtn}>
                 <FaWindowClose />
               </div>

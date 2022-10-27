@@ -10,7 +10,7 @@ export default function DiaryForm({ uid }) {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState(null);
   const [text, setText] = useState("");
-  const [isEditClicked, setIsEditClicked] = useState(false);
+  const [isEditClicked] = useState(false);
   const { addDocument, response } = useFirestore("diary");
 
   useEffect(() => {
@@ -69,7 +69,12 @@ export default function DiaryForm({ uid }) {
             required
             onChange={handleDate}
           ></textarea>
-          <input type="file" id="file" onChange={handleDate} />
+          <input
+            className={styles.fileInput}
+            type="file"
+            id="file"
+            onChange={handleDate}
+          />
           <button type="submit">저장하기</button>
         </fieldset>
       </form>

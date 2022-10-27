@@ -8,13 +8,14 @@ import {
   FaTrashAlt,
 } from "react-icons/fa";
 import { useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 export default function ToDoItem({ item, doing }) {
   const {
     deleteDocument,
     updateDocumentCliked,
     updateDocumentEditCliked,
-    updateDocument,
+    updateTodoDocument,
   } = useFirestore("todo");
   const editInputRef = useRef(null);
   const [newText, setNewText] = useState(item.title);
@@ -23,9 +24,11 @@ export default function ToDoItem({ item, doing }) {
   };
   return (
     <>
-      {item.isClicked == doing ? null : (
-        <li
-          className={item.isClicked ? styles.todoDone : styles.todoDoing}
+      {item.isClicked === doing ? null : (
+        <motion.li
+          layoutId={item.id}
+          transition={{ duration: 0.5 }}
+          //className={isClick ? styles.todoDone : styles.todoDoing}
           key={item.id}
         >
           <div
@@ -55,7 +58,7 @@ export default function ToDoItem({ item, doing }) {
                 type="submit"
                 onClick={(event) => {
                   event.stopPropagation();
-                  updateDocument(item.id, newText);
+                  updateTodoDocument(item.id, newText);
                 }}
               >
                 <FaCheck />
@@ -68,8 +71,7 @@ export default function ToDoItem({ item, doing }) {
           <div className={styles.btn}>
             <button
               type="button"
-              onClick={(event) => {
-                event.stopPropagation();
+              onClick={() => {
                 updateDocumentEditCliked(item.id, item.isEditClicked);
               }}
             >
@@ -85,7 +87,7 @@ export default function ToDoItem({ item, doing }) {
               <FaTrashAlt />
             </button>
           </div>
-        </li>
+        </motion.li>
       )}
     </>
   );

@@ -121,11 +121,23 @@ export const useFirestore = (transaction) => {
       dispatch({ type: "error", payload: error.message });
     }
   };
-
+  const updateTodoDocument = async (id, title) => {
+    dispatch({ type: "isPending" });
+    try {
+      const docRef = await updateDoc(doc(colRef, id), {
+        isEditClicked: true,
+        title: title,
+      });
+      dispatch({ type: "updateDoc", payload: docRef });
+    } catch (error) {
+      dispatch({ type: "error", payload: error.message });
+    }
+  };
   return {
     addDocument,
     deleteDocument,
     updateDocument,
+    updateTodoDocument,
     updateDocumentCliked,
     updateDocumentEditCliked,
     response,
