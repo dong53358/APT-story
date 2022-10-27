@@ -19,7 +19,9 @@ function App() {
               element={
                 user ? <Home /> : <Navigate replace={true} to="/login" />
               }
-            ></Route>
+            >
+              <Route path="/img/:Id" element={<Home />}></Route>
+            </Route>
             <Route
               path="/login"
               element={!user ? <Login /> : <Navigate replace={true} to="/" />}

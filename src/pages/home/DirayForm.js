@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { storage } from "../../firebase/config";
 import { useFirestore } from "../../hooks/useFirestore";
 import { v4 } from "uuid";
+import { FaBook } from "react-icons/fa";
+import styles from "./Home.module.css";
 
 export default function DiaryForm({ uid }) {
   const [title, setTitle] = useState("");
@@ -44,8 +46,13 @@ export default function DiaryForm({ uid }) {
     <>
       <form onSubmit={handleSubmit}>
         <fieldset>
-          <legend>일기 쓰기</legend>
-          <label htmlFor="tit">일기 제목 :</label>
+          <div className={styles.diaryForm_title}>
+            <span>
+              <FaBook />
+            </span>
+            <span>일기 쓰기</span>
+          </div>
+          <label htmlFor="tit">일기 제목 </label>
           <input
             value={title}
             id="tit"
@@ -53,8 +60,8 @@ export default function DiaryForm({ uid }) {
             required
             onChange={handleDate}
           />
-          <input type="file" id="file" onChange={handleDate} />
-          <label htmlFor="txt">일기 내용 :</label>
+
+          <label htmlFor="txt">일기 내용</label>
           <textarea
             value={text}
             id="txt"
@@ -62,7 +69,7 @@ export default function DiaryForm({ uid }) {
             required
             onChange={handleDate}
           ></textarea>
-
+          <input type="file" id="file" onChange={handleDate} />
           <button type="submit">저장하기</button>
         </fieldset>
       </form>

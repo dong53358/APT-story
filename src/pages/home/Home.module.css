@@ -21,11 +21,15 @@
   border: none;
 }
 
-.side_menu legend {
+.diaryForm_title {
+  display: flex;
   font-size: 1.5em;
   font-weight: bold;
-  margin-bottom: 20px;
+  padding-top: 10px;
   color: #fff;
+}
+.diaryForm_title span {
+  margin-right: 10px;
 }
 
 .side_menu input {
@@ -34,6 +38,7 @@
   padding: 10px;
   border: none;
   border-radius: 5px;
+  margin-bottom: 10px;
 }
 
 .side_menu label {
@@ -45,6 +50,7 @@
 .side_menu textarea {
   height: 150px;
   width: 100%;
+  padding: 10px;
   border-radius: 5px;
 }
 
@@ -92,6 +98,7 @@
 
 .content_list .img {
   width: 100%;
+  cursor: pointer;
 }
 
 .btn {
@@ -138,4 +145,55 @@
   color: rgb(63, 229, 63);
   font-size: 20px;
   margin-bottom: 10px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+}
+
+.bigImg {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  width: 400px;
+  height: 55%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  border-radius: 20px;
+  z-index: 100;
+  background-color: #484646;
+  overflow: hidden;
+}
+
+.bigImg img {
+  width: 100%;
+  z-index: 101;
+}
+
+.closeBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 102;
+  font-size: 30px;
+  margin: 10px;
+}
+
+.closeBtn :hover {
+  color: rgba(0, 0, 0, 0.5);
+}
+.closeBtn :active {
+  color: rgba(255, 0, 0, 1);
 }
