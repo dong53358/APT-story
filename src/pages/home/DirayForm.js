@@ -36,11 +36,12 @@ export default function DiaryForm({ uid }) {
       addDocument({ uid, title, text, isEditClicked });
       return;
     }
-    const imageRef = ref(storage, `images/${image.name + v4()}`);
+    const imgName = image.name + v4();
+    const imageRef = ref(storage, `images/${imgName}`);
     let imageUrl = "";
     await uploadBytes(imageRef, image);
     imageUrl = await getDownloadURL(imageRef);
-    addDocument({ uid, title, text, imageUrl, isEditClicked });
+    addDocument({ uid, title, text, imageUrl, imgName, isEditClicked });
   };
   return (
     <>

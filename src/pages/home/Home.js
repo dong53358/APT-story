@@ -7,8 +7,8 @@ import styles from "./Home.module.css";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { useState } from "react";
 import { FaWindowClose } from "react-icons/fa";
-import { HelmetProvider } from "react-helmet-async";
-import { Helmet } from "react-helmet";
+import { HelmetProvider, Helmet } from "react-helmet-async";
+
 export default function Home() {
   const { user } = useAuthContext();
   const { documents, error } = useCollection("diary", ["uid", "==", user.uid]);
@@ -30,7 +30,7 @@ export default function Home() {
     <>
       <HelmetProvider>
         <Helmet>
-          <title>My diaries</title>
+          <title>My diary</title>
         </Helmet>
       </HelmetProvider>
       <main className={styles.cont}>

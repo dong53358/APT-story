@@ -3,6 +3,8 @@ import { FaCheck, FaEdit, FaTrashAlt } from "react-icons/fa";
 import { useFirestore } from "../../hooks/useFirestore";
 import styles from "./Home.module.css";
 import { AnimatePresence, motion } from "framer-motion";
+import { deleteObject, ref } from "firebase/storage";
+import { storage } from "../../firebase/config";
 
 export function DiaryItem({ item, imgClick }) {
   const { deleteDocument, updateDocumentEditCliked, updateDocument } =
@@ -80,7 +82,9 @@ export function DiaryItem({ item, imgClick }) {
               <button
                 type="button"
                 onClick={() => {
+                  const desertRef = ref(storage, `images/${item.imgName}`);
                   deleteDocument(item.id);
+                  deleteObject(desertRef);
                 }}
               >
                 <FaTrashAlt />

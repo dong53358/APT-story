@@ -30,8 +30,8 @@
   padding: 6px 12px;
   border-radius: 10px;
   color: #fff;
-  background-color: teal;
-  border: 1px solid teal;
+  background-color: rgb(30, 55, 153);
+  border: 1px solid rgb(30, 55, 153);
   font-weight: bold;
   cursor: pointer;
 }

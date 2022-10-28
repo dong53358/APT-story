@@ -93,6 +93,10 @@
   font-weight: bold;
   margin-bottom: 10px;
 }
+.todolist_title span {
+  margin-left: 10px;
+}
+
 .todolist span {
   margin-top: 3px;
   margin-left: 10px;
