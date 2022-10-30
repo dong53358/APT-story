@@ -24,7 +24,11 @@ export function DiaryItem({ item, imgClick }) {
   return (
     <>
       <AnimatePresence>
-        <li key={item.id}>
+        <motion.li
+          layoutId={item.id}
+          transition={{ duration: 0.5 }}
+          key={item.id}
+        >
           <div className={styles.li_content}>
             <div>
               {item.isEditClicked ? (
@@ -84,7 +88,7 @@ export function DiaryItem({ item, imgClick }) {
                 onClick={() => {
                   const desertRef = ref(storage, `images/${item.imgName}`);
                   deleteDocument(item.id);
-                  deleteObject(desertRef);
+                  if (item.imgName) deleteObject(desertRef);
                 }}
               >
                 <FaTrashAlt />
@@ -93,12 +97,12 @@ export function DiaryItem({ item, imgClick }) {
           </div>
 
           <motion.img
-            layoutId={item.id}
+            layoutId={item.imgName}
             onClick={() => imgClick(item.id, item.imageUrl)}
             className={styles.img}
             src={item.imageUrl}
           />
-        </li>
+        </motion.li>
       </AnimatePresence>
     </>
   );
