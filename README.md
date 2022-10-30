@@ -1,6 +1,6 @@
 # react + firebase =>my-diary
 ## [Homepage](https://mydiary-50193.web.app/)
-### 📒 **주요업무** 
+### 📒 **주요 기능** 
 
 - firebase auth 이용 ⇒ 로그인 회원가입 기능 구현
 - firebase storage 이용 ⇒ 사진 업로드 기능 구현
