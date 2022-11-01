@@ -1,6 +1,14 @@
 # react + firebase =>my-diary
 ## [Homepage](https://mydiary-50193.web.app/)
-### 📒 **주요 기능** 
+🗓️ **작업기간** : 2022.10.10 ~ 2022.10.28
+
+👨‍💻 **투입인원** : 1명
+
+🌱 **스킬 및 사용툴**
+
+`React` `JavaScript` `module.css` `Git` `GitHub` `motion` `firebase`
+
+📒 **주요업무** 
 
 - firebase auth 이용 ⇒ 로그인 회원가입 기능 구현
 - firebase storage 이용 ⇒ 사진 업로드 기능 구현
