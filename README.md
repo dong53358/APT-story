@@ -15,6 +15,8 @@
 - firebase cloud firestore 이용 ⇒ 투두리스트 기능 구현
 - motion  - 데이터 추가삭제시 자연스로운 애니매이션 구현
 
+---
+
 ● 회원가입 화면
 ![로그인](https://user-images.githubusercontent.com/82385282/198648920-86f42abe-6c9d-4d38-bf47-69279dd99596.png)
 ---
