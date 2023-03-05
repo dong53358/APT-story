@@ -1,22 +1,30 @@
 import { useState } from "react";
 import { useLogin } from "../../hooks/useLogin";
+import { passwordValidation } from "../../utils/validations";
 import styles from "./Login.module.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState(true);
   const { error, ispending, login } = useLogin();
 
-  const handleData = (event) => {
-    if (event.target.type === "email") {
-      setEmail(event.target.value);
-    } else if (event.target.type === "password") {
-      setPassword(event.target.value);
-    }
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    login(email, password);
+    if (passwordValidation(password)) {
+      setPasswordError(true);
+      login(email, password);
+    } else {
+      setPasswordError(false);
+    }
   };
 
   return (
@@ -28,19 +36,23 @@ export default function Login() {
             type="email"
             id="myEmail"
             required
-            placeholder="아이디"
+            placeholder="이메일"
             value={email}
-            onChange={handleData}
+            onChange={handleEmailChange}
           />
-
           <input
             type="password"
             id="myPassword"
             required
             placeholder="비밀번호"
             value={password}
-            onChange={handleData}
+            onChange={handlePasswordChange}
           />
+          {!passwordError && (
+            <span className={styles.login_form_input_span}>
+              비밀번호가 6자 이상이어야 합니다
+            </span>
+          )}
         </div>
 
         {!ispending && (
@@ -49,7 +61,7 @@ export default function Login() {
           </button>
         )}
         {ispending && <string>로그인 진행중...</string>}
-        {error && <string>{error}</string>}
+        {error && <div className={styles.login_form_error}>{error}</div>}
       </fieldset>
     </form>
   );

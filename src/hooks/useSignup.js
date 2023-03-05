@@ -17,7 +17,6 @@ export const useSignup = () => {
     createUserWithEmailAndPassword(appAuth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
 
         if (!user) {
           throw new Error("회원가입에 실패했습니다.");
@@ -32,13 +31,11 @@ export const useSignup = () => {
           .catch((err) => {
             setError(err.message);
             setIspending(false);
-            console.log(err.message);
           });
       })
       .catch((err) => {
         setError(err.message);
         setIspending(false);
-        console.log(err.message);
       });
   };
   return { error, isPending, signup };

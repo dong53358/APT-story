@@ -1,13 +1,19 @@
 .login_form {
   width: 454px;
-  height: 308px;
+  height: 354px;
   margin: 60px auto;
+}
+
+@media (max-width: 600px) {
+  .login_form {
+    width: 90%;
+  }
 }
 
 .login_form fieldset {
   border-radius: 5px;
   border: 1px solid #adacac;
-  padding: 28px;
+  padding: 10px 28px;
 }
 
 .login_form legend {
@@ -25,29 +31,31 @@
   border: 1px solid #ccc;
   font-size: 1em;
   padding: 14px;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
-.login_form_inputContainer input:first-child {
-  width: 100%;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
-.login_form_inputContainer input:nth-child(2) {
-  width: 100%;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+.login_form_input_span {
+  font-size: 1em;
+  color: red;
 }
 
 .login_form button {
   width: 100%;
-  margin-top: 40px;
+  margin-top: 30px;
+  margin-bottom: 20px;
   float: right;
   padding: 15px 0px;
   border-radius: 5px;
   color: #fff;
   background-color: rgb(30, 55, 153);
   border: 1px solid rgb(30, 55, 153);
+  font-size: 1.2em;
   font-weight: bold;
   cursor: pointer;
+}
+
+.login_form_error {
+  color: red;
+  font-size: 1em;
 }

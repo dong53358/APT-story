@@ -32,7 +32,7 @@ export default function Signup() {
             type="email"
             id="myEmail"
             required
-            placeholder="아이디"
+            placeholder="이메일"
             value={email}
             onChange={handleData}
           />
@@ -57,6 +57,7 @@ export default function Signup() {
         <button type="submit" className="btn">
           회원가입
         </button>
+        {error && <div className={styles.signup_form_error}>{error}</div>}
       </fieldset>
     </form>
   );
