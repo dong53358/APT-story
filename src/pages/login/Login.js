@@ -23,23 +23,26 @@ export default function Login() {
     <form className={styles.login_form} onSubmit={handleSubmit}>
       <fieldset>
         <legend>로그인</legend>
-        <label htmlFor="myEmail">email :</label>
-        <input
-          type="email"
-          id="myEmail"
-          required
-          value={email}
-          onChange={handleData}
-        />
+        <div className={styles.login_form_inputContainer}>
+          <input
+            type="email"
+            id="myEmail"
+            required
+            placeholder="아이디"
+            value={email}
+            onChange={handleData}
+          />
 
-        <label htmlFor="myPassword">password :</label>
-        <input
-          type="password"
-          id="myPassword"
-          required
-          value={password}
-          onChange={handleData}
-        />
+          <input
+            type="password"
+            id="myPassword"
+            required
+            placeholder="비밀번호"
+            value={password}
+            onChange={handleData}
+          />
+        </div>
+
         {!ispending && (
           <button type="submit" className={styles.btn}>
             로그인
