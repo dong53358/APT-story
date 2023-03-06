@@ -23,13 +23,13 @@
 
 ## ● 회원가입 화면
 
-![로그인](https://user-images.githubusercontent.com/82385282/198648920-86f42abe-6c9d-4d38-bf47-69279dd99596.png)
+![회원가입](https://user-images.githubusercontent.com/82385282/223034697-5301b060-7161-48f8-8f9c-f1b279d58a78.png)
 
 ---
 
 ## ● 로그인 화면
 
-![회원가입](https://user-images.githubusercontent.com/82385282/198648978-eb4aca75-dc09-4c26-b37d-d815e205338b.png)
+![로그인](https://user-images.githubusercontent.com/82385282/223034534-b199b853-0eda-46fc-b254-9f1e40f48e5b.png)
 
 ---
 
