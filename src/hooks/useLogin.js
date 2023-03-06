@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { appAuth } from "../firebase/config";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { appAuth, provider } from "../firebase/config";
 import { useAuthContext } from "./useAuthContext";
 
 export const useLogin = () => {
@@ -29,5 +29,23 @@ export const useLogin = () => {
         setIspending(false);
       });
   };
-  return { error, isPending, login };
+
+  const googleLogin = () => {
+    signInWithPopup(appAuth, provider)
+      .then((result) => {
+        const user = result.user;
+        dispatch({ type: "login", payload: user });
+        setError(null);
+        setIspending(false);
+        if (!user) {
+          throw new Error("로그인에 실패했습니다.");
+        }
+      })
+      .catch((err) => {
+        setError(err.message);
+        setIspending(false);
+      });
+  };
+
+  return { error, isPending, login, googleLogin };
 };

@@ -40,11 +40,10 @@
   color: red;
 }
 
-.login_form button {
+.login_form_btn {
   width: 100%;
-  margin-top: 30px;
-  margin-bottom: 20px;
   float: right;
+  margin: 5px 0px;
   padding: 15px 0px;
   border-radius: 5px;
   color: #fff;
@@ -53,6 +52,33 @@
   font-size: 1.2em;
   font-weight: bold;
   cursor: pointer;
+}
+
+.login_form_google_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  float: right;
+  margin: 5px 0px;
+  padding: 15px 0px;
+  border-radius: 5px;
+  color: black;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login_form_google_btn span {
+  display: flex;
+  margin: 0px 5px;
+}
+
+.login_form_google_btn span img {
+  width: 25px;
+  height: 25px;
 }
 
 .login_form_error {

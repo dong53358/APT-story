@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { getFirestore, Timestamp } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
@@ -24,4 +24,15 @@ const appFireStore = getFirestore(app);
 const storage = getStorage(app);
 const timestamp = Timestamp;
 
-export { appAuth, appFireStore, storage, timestamp };
+const provider = new GoogleAuthProvider();
+provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
+
+export {
+  appAuth,
+  appFireStore,
+  storage,
+  timestamp,
+  GoogleAuthProvider,
+  signInWithPopup,
+  provider,
+};
