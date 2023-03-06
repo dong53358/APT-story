@@ -29,7 +29,7 @@
 
 ## ● 로그인 화면
 
-![로그인](https://user-images.githubusercontent.com/82385282/223034534-b199b853-0eda-46fc-b254-9f1e40f48e5b.png)
+![로그인](https://user-images.githubusercontent.com/82385282/223189194-f1b009b4-df78-4a04-a76c-119d4a8c7fa4.png)
 
 ---
 
