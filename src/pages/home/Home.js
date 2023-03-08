@@ -7,11 +7,12 @@ import styles from "./Home.module.css";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { useState } from "react";
 import { FaWindowClose } from "react-icons/fa";
-import { HelmetProvider, Helmet } from "react-helmet-async";
 
 export default function Home() {
   const { user } = useAuthContext();
   const { documents, error } = useCollection("diary", ["uid", "==", user.uid]);
+  const { documents: documents2, error: error2 } = useCollection("diary");
+  console.log(documents2);
   const [imgUrl, setImgUrl] = useState("");
   const imgMatch = useMatch(`/img/:imgId`);
   const navigate = useNavigate();
@@ -28,18 +29,13 @@ export default function Home() {
   };
   return (
     <>
-      <HelmetProvider>
-        <Helmet>
-          <title>My diary</title>
-        </Helmet>
-      </HelmetProvider>
       <main className={styles.cont}>
         <aside className={styles.side_menu}>
           <DiaryForm uid={user.uid}></DiaryForm>
         </aside>
         <ul className={styles.content_list}>
-          {error && <strong>{error}</strong>}
-          {documents && <DiaryList diaries={documents} imgClick={imgClick} />}
+          {error2 && <strong>{error2}</strong>}
+          {documents2 && <DiaryList diaries={documents2} imgClick={imgClick} />}
         </ul>
       </main>
       <AnimatePresence>

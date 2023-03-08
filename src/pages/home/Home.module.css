@@ -2,8 +2,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 98vw;
-  margin-top: 30px;
+  justify-content: center;
+  min-width: 485px;
+  margin-left: 300px;
+  margin: 85px auto;
+}
+
+@media (max-width: 1024px) {
+  .cont {
+    margin: 136px auto;
+    margin-left: none;
+  }
 }
 
 .side_menu {
