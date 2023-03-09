@@ -4,9 +4,11 @@ import { useAuthContext } from "./hooks/useAuthContext";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
-import ToDo from "./pages/toDo/ToDo";
 import Nav from "./components/Nav";
 import styles from "./App.module.css";
+import Info from "./pages/info/Info";
+import Free from "./pages/free/Free";
+import Quest from "./pages/quest/Quest";
 
 function App() {
   const { isAuthReady, user } = useAuthContext();
@@ -17,7 +19,7 @@ function App() {
           <>
             <Header />
             <div className={styles.container}>
-              <Nav />
+              {user ? <Nav /> : null}
               <Routes>
                 <Route
                   path="/"
@@ -40,9 +42,21 @@ function App() {
                   }
                 ></Route>
                 <Route
-                  path="/todo"
+                  path="/info"
                   element={
-                    user ? <ToDo /> : <Navigate replace={true} to="/login" />
+                    user ? <Info /> : <Navigate replace={true} to="/login" />
+                  }
+                ></Route>
+                <Route
+                  path="/quest"
+                  element={
+                    user ? <Quest /> : <Navigate replace={true} to="/login" />
+                  }
+                ></Route>
+                <Route
+                  path="/free"
+                  element={
+                    user ? <Free /> : <Navigate replace={true} to="/login" />
                   }
                 ></Route>
               </Routes>

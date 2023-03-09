@@ -6,7 +6,7 @@ import { v4 } from "uuid";
 import { FaBook } from "react-icons/fa";
 import styles from "./Home.module.css";
 
-export default function DiaryForm({ uid }) {
+export default function DiaryForm({ uid, displayName }) {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState(null);
   const [text, setText] = useState("");
@@ -33,7 +33,7 @@ export default function DiaryForm({ uid }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (image == null) {
-      addDocument({ uid, title, text, isEditClicked });
+      addDocument({ uid, displayName, title, text, isEditClicked });
       return;
     }
     const imgName = image.name + v4();
@@ -41,7 +41,15 @@ export default function DiaryForm({ uid }) {
     let imageUrl = "";
     await uploadBytes(imageRef, image);
     imageUrl = await getDownloadURL(imageRef);
-    addDocument({ uid, title, text, imageUrl, imgName, isEditClicked });
+    addDocument({
+      uid,
+      displayName,
+      title,
+      text,
+      imageUrl,
+      imgName,
+      isEditClicked,
+    });
   };
   return (
     <>
@@ -51,9 +59,9 @@ export default function DiaryForm({ uid }) {
             <span>
               <FaBook />
             </span>
-            <span>일기 쓰기</span>
+            <span> 글쓰기</span>
           </div>
-          <label htmlFor="tit">일기 제목 </label>
+          <label htmlFor="tit">제목 </label>
           <input
             value={title}
             id="tit"
@@ -62,7 +70,7 @@ export default function DiaryForm({ uid }) {
             onChange={handleDate}
           />
 
-          <label htmlFor="txt">일기 내용</label>
+          <label htmlFor="txt">내용</label>
           <textarea
             value={text}
             id="txt"
@@ -76,7 +84,7 @@ export default function DiaryForm({ uid }) {
             id="file"
             onChange={handleDate}
           />
-          <button type="submit">저장하기</button>
+          <button type="submit">등록</button>
         </fieldset>
       </form>
     </>

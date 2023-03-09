@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
 import styles from "./Header.module.css";
@@ -7,8 +7,8 @@ import styles from "./Header.module.css";
 export default function Header() {
   const { logout } = useLogout();
   const { user } = useAuthContext();
-  const homeMatch = useMatch("/");
-  const todoMatch = useMatch("/todo");
+  console.log(user);
+
   return (
     <>
       <nav className={styles.header}>

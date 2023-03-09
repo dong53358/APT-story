@@ -30,8 +30,11 @@ export default function Home() {
   return (
     <>
       <main className={styles.cont}>
+        <div className={styles.write_btn_container}>
+          <button>글쓰기</button>
+        </div>
         <aside className={styles.side_menu}>
-          <DiaryForm uid={user.uid}></DiaryForm>
+          <DiaryForm uid={user.uid} displayName={user.displayName}></DiaryForm>
         </aside>
         <ul className={styles.content_list}>
           {error2 && <strong>{error2}</strong>}

@@ -5,7 +5,10 @@ import styles from "./Nav.module.css";
 export default function Nav() {
   const { user } = useAuthContext();
   const homeMatch = useMatch("/");
-  const todoMatch = useMatch("/todo");
+  const infoMatch = useMatch("/info");
+  const questMatch = useMatch("/quest");
+  const freeMatch = useMatch("/free");
+
   return (
     <>
       <div className={styles.nav_menu}>
@@ -20,13 +23,31 @@ export default function Nav() {
                 Home
               </div>
             </Link>
-            <Link to="/todo">
+            <Link to="/info">
               <div
                 className={
-                  todoMatch ? styles.nav_menu_li_click : styles.nav_menu_li
+                  infoMatch ? styles.nav_menu_li_click : styles.nav_menu_li
                 }
               >
-                To Do list
+                정보공유
+              </div>
+            </Link>
+            <Link to="/quest">
+              <div
+                className={
+                  questMatch ? styles.nav_menu_li_click : styles.nav_menu_li
+                }
+              >
+                질문
+              </div>
+            </Link>
+            <Link to="/free">
+              <div
+                className={
+                  freeMatch ? styles.nav_menu_li_click : styles.nav_menu_li
+                }
+              >
+                자유
               </div>
             </Link>
           </>

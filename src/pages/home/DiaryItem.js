@@ -66,9 +66,12 @@ export function DiaryItem({ item, imgClick }) {
                   </button>
                 </form>
               ) : (
-                <div>
-                  <strong className={styles.title}>{item.title}</strong>
-                  <p className={styles.text}>{item.text}</p>
+                <div className={styles.post}>
+                  <h3 className={styles.post_writer}>
+                    작성자: {item.displayName}
+                  </h3>
+                  <strong className={styles.post_title}>{item.title}</strong>
+                  <p className={styles.post_detail}>{item.text}</p>
                 </div>
               )}
             </div>
