@@ -2,17 +2,17 @@ import { useMatch, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
 import DiaryList from "./DiaryList";
-import DiaryForm from "./DirayForm";
 import styles from "./Home.module.css";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { useState } from "react";
 import { FaWindowClose } from "react-icons/fa";
+import Modal from "../../components/Modal";
 
 export default function Home() {
   const { user } = useAuthContext();
   const { documents, error } = useCollection("diary", ["uid", "==", user.uid]);
-  const { documents: documents2, error: error2 } = useCollection("diary");
-  console.log(documents2);
+  const { documents: documents2, error: error2 } = useCollection("board");
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
   const imgMatch = useMatch(`/img/:imgId`);
   const navigate = useNavigate();
@@ -27,20 +27,32 @@ export default function Home() {
   const closeBtnClick = () => {
     navigate("/");
   };
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+    document.body.classList.add(styles["modal-open"]);
+  };
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    document.body.classList.remove(styles["modal-open"]);
+  };
   return (
     <>
       <main className={styles.cont}>
         <div className={styles.write_btn_container}>
-          <button>글쓰기</button>
+          <button onClick={handleModalOpen}>글쓰기</button>
         </div>
-        <aside className={styles.side_menu}>
-          <DiaryForm uid={user.uid} displayName={user.displayName}></DiaryForm>
-        </aside>
         <ul className={styles.content_list}>
           {error2 && <strong>{error2}</strong>}
           {documents2 && <DiaryList diaries={documents2} imgClick={imgClick} />}
         </ul>
       </main>
+      {isModalOpen && (
+        <Modal
+          handleModalClose={handleModalClose}
+          uid={user.uid}
+          displayName={user.displayName}
+        />
+      )}
       <AnimatePresence>
         {imgMatch ? (
           <>

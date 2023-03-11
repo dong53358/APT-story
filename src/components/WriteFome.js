@@ -1,17 +1,17 @@
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useEffect, useState } from "react";
-import { storage } from "../../firebase/config";
-import { useFirestore } from "../../hooks/useFirestore";
+import { storage } from "../firebase/config";
+import { useFirestore } from "../hooks/useFirestore";
 import { v4 } from "uuid";
-import { FaBook } from "react-icons/fa";
-import styles from "./Home.module.css";
+import closeBtn from "../assets/images/closeBtn.png";
+import styles from "./Modal.module.css";
 
-export default function DiaryForm({ uid, displayName }) {
+export default function DiaryForm({ uid, displayName, handleModalClose }) {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState(null);
   const [text, setText] = useState("");
   const [isEditClicked] = useState(false);
-  const { addDocument, response } = useFirestore("diary");
+  const { addDocument, response } = useFirestore("board");
 
   useEffect(() => {
     if (response.success) {
@@ -32,15 +32,22 @@ export default function DiaryForm({ uid, displayName }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     if (image == null) {
       addDocument({ uid, displayName, title, text, isEditClicked });
+
+      handleModalClose();
       return;
     }
+
     const imgName = image.name + v4();
     const imageRef = ref(storage, `images/${imgName}`);
     let imageUrl = "";
+
     await uploadBytes(imageRef, image);
+
     imageUrl = await getDownloadURL(imageRef);
+
     addDocument({
       uid,
       displayName,
@@ -50,33 +57,36 @@ export default function DiaryForm({ uid, displayName }) {
       imgName,
       isEditClicked,
     });
+
+    handleModalClose();
   };
+
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.write_form}>
         <fieldset>
-          <div className={styles.diaryForm_title}>
+          <div className={styles.write_form_title}>
+            <span>{displayName}</span>
+            <span>글쓰기</span>
             <span>
-              <FaBook />
+              <img onClick={handleModalClose} src={closeBtn} alt="closeBtn" />
             </span>
-            <span> 글쓰기</span>
           </div>
-          <label htmlFor="tit">제목 </label>
           <input
             value={title}
             id="tit"
             type="text"
             required
             onChange={handleDate}
+            placeholder="제목"
           />
-
-          <label htmlFor="txt">내용</label>
           <textarea
             value={text}
             id="txt"
             type="text"
             required
             onChange={handleDate}
+            placeholder="내용"
           ></textarea>
           <input
             className={styles.fileInput}

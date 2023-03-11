@@ -8,7 +8,7 @@ import { storage } from "../../firebase/config";
 
 export function DiaryItem({ item, imgClick }) {
   const { deleteDocument, updateDocumentEditCliked, updateDocument } =
-    useFirestore("diary");
+    useFirestore("board");
   const [newTitle, setNewTitle] = useState(item.title);
   const [newText, setNewText] = useState(item.text);
 
