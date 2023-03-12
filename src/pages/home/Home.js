@@ -1,7 +1,7 @@
 import { useMatch, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
-import DiaryList from "./DiaryList";
+import BoardList from "./BoardList";
 import styles from "./Home.module.css";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { useState } from "react";
@@ -17,14 +17,18 @@ export default function Home() {
   const imgMatch = useMatch(`/img/:imgId`);
   const navigate = useNavigate();
   const { scrollY } = useScroll();
+
   const imgClick = (imgId, imgUrl) => {
     navigate(`/img/${imgId}`);
     setImgUrl(imgUrl);
+    document.body.classList.add(styles["modal-open"]);
   };
   const onOverlayClick = () => {
+    document.body.classList.remove(styles["modal-open"]);
     navigate("/");
   };
   const closeBtnClick = () => {
+    document.body.classList.remove(styles["modal-open"]);
     navigate("/");
   };
   const handleModalOpen = () => {
@@ -35,6 +39,7 @@ export default function Home() {
     setIsModalOpen(false);
     document.body.classList.remove(styles["modal-open"]);
   };
+
   return (
     <>
       <main className={styles.cont}>
@@ -43,11 +48,12 @@ export default function Home() {
         </div>
         <ul className={styles.content_list}>
           {error2 && <strong>{error2}</strong>}
-          {documents2 && <DiaryList diaries={documents2} imgClick={imgClick} />}
+          {documents2 && <BoardList diaries={documents2} imgClick={imgClick} />}
         </ul>
       </main>
       {isModalOpen && (
         <Modal
+          type="ADD"
           handleModalClose={handleModalClose}
           uid={user.uid}
           displayName={user.displayName}

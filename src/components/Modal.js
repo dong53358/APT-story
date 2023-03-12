@@ -1,16 +1,18 @@
 import React from "react";
 import styles from "./Modal.module.css";
-import DiaryForm from "./WriteFome";
+import WriteForm from "./WriteFome";
 
-const Modal = ({ uid, displayName, handleModalClose }) => {
+const Modal = ({ type, uid, displayName, handleModalClose, item }) => {
   return (
     <>
       <div className={styles.modal_container}>
-        <DiaryForm
+        <WriteForm
+          type={type}
           uid={uid}
           displayName={displayName}
           handleModalClose={handleModalClose}
-        ></DiaryForm>
+          item={item}
+        ></WriteForm>
       </div>
       <div className={styles.overlay} onClick={handleModalClose}></div>
     </>

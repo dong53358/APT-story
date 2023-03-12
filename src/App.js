@@ -42,6 +42,12 @@ function App() {
                   }
                 ></Route>
                 <Route
+                  path="/free"
+                  element={
+                    user ? <Free /> : <Navigate replace={true} to="/login" />
+                  }
+                ></Route>
+                <Route
                   path="/info"
                   element={
                     user ? <Info /> : <Navigate replace={true} to="/login" />
@@ -51,12 +57,6 @@ function App() {
                   path="/quest"
                   element={
                     user ? <Quest /> : <Navigate replace={true} to="/login" />
-                  }
-                ></Route>
-                <Route
-                  path="/free"
-                  element={
-                    user ? <Free /> : <Navigate replace={true} to="/login" />
                   }
                 ></Route>
               </Routes>

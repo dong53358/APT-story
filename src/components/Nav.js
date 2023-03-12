@@ -23,6 +23,16 @@ export default function Nav() {
                 Home
               </div>
             </Link>
+
+            <Link to="/free">
+              <div
+                className={
+                  freeMatch ? styles.nav_menu_li_click : styles.nav_menu_li
+                }
+              >
+                자유
+              </div>
+            </Link>
             <Link to="/info">
               <div
                 className={
@@ -39,15 +49,6 @@ export default function Nav() {
                 }
               >
                 질문
-              </div>
-            </Link>
-            <Link to="/free">
-              <div
-                className={
-                  freeMatch ? styles.nav_menu_li_click : styles.nav_menu_li
-                }
-              >
-                자유
               </div>
             </Link>
           </>

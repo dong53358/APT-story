@@ -5,18 +5,44 @@ import { useFirestore } from "../hooks/useFirestore";
 import { v4 } from "uuid";
 import closeBtn from "../assets/images/closeBtn.png";
 import styles from "./Modal.module.css";
+import PreviewImage from "./PreviewImage";
 
-export default function DiaryForm({ uid, displayName, handleModalClose }) {
-  const [title, setTitle] = useState("");
-  const [image, setImage] = useState(null);
-  const [text, setText] = useState("");
+// function PreviewImage({ imageFile }) {
+//   const [imageUrl, setImageUrl] = useState("''");
+
+//   useEffect(() => {
+//     if (imageFile) {
+//       const reader = new FileReader();
+//       reader.onload = () => {
+//         setImageUrl(reader.result);
+//       };
+//       reader.readAsDataURL(imageFile);
+//     }
+//   }, [imageFile]);
+
+//   return imageUrl ? <img src={imageUrl} alt="preview" /> : null;
+// }
+
+export default function WriteFome({
+  type,
+  uid,
+  displayName,
+  handleModalClose,
+  item,
+}) {
+  const [category, setCategory] = useState(item?.category || "자유");
+  const [title, setTitle] = useState(item?.title || "");
+  const [imageFile, setImage] = useState(item?.imageUrl || "");
+  const [imgUrl, setImgUrl] = useState("");
+  const [text, setText] = useState(item?.text || "");
   const [isEditClicked] = useState(false);
-  const { addDocument, response } = useFirestore("board");
-
+  const { addDocument, updateDocument, response } = useFirestore("board");
+  console.log(imageFile);
   useEffect(() => {
     if (response.success) {
       setTitle("");
       setText("");
+      setCategory("자유");
     }
   }, [response.success]);
 
@@ -32,34 +58,56 @@ export default function DiaryForm({ uid, displayName, handleModalClose }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (type === "ADD") {
+      if (imageFile == null) {
+        addDocument({ uid, displayName, category, title, text, isEditClicked });
 
-    if (image == null) {
-      addDocument({ uid, displayName, title, text, isEditClicked });
+        handleModalClose();
+        return;
+      }
 
+      const imgName = imageFile.name + v4();
+      const imageRef = ref(storage, `images/${imgName}`);
+      let imageUrl = "";
+
+      await uploadBytes(imageRef, imageFile);
+
+      imageUrl = await getDownloadURL(imageRef);
+
+      addDocument({
+        uid,
+        displayName,
+        category,
+        title,
+        text,
+        imageUrl,
+        imgName,
+        isEditClicked,
+      });
       handleModalClose();
       return;
     }
-
-    const imgName = image.name + v4();
+    const imgName = imageFile.name + v4();
     const imageRef = ref(storage, `images/${imgName}`);
     let imageUrl = "";
 
-    await uploadBytes(imageRef, image);
+    await uploadBytes(imageRef, imageFile);
 
     imageUrl = await getDownloadURL(imageRef);
-
-    addDocument({
-      uid,
-      displayName,
-      title,
-      text,
-      imageUrl,
-      imgName,
-      isEditClicked,
-    });
+    updateDocument(item.id, title, text, category, imageUrl, imgName);
 
     handleModalClose();
   };
+
+  useEffect(() => {
+    if (imageFile) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImgUrl(reader.result);
+      };
+      reader.readAsDataURL(imageFile);
+    }
+  }, [imageFile]);
 
   return (
     <>
@@ -72,12 +120,22 @@ export default function DiaryForm({ uid, displayName, handleModalClose }) {
               <img onClick={handleModalClose} src={closeBtn} alt="closeBtn" />
             </span>
           </div>
+          <select
+            className={styles.write_form_category}
+            value={category}
+            onChange={(event) => setCategory(event.target.value)}
+          >
+            <option value="자유">자유</option>
+            <option value="정보공유">정보공유</option>
+            <option value="질문">질문</option>
+          </select>
           <input
             value={title}
             id="tit"
             type="text"
             required
             onChange={handleDate}
+            maxLength="50"
             placeholder="제목"
           />
           <textarea
@@ -92,8 +150,10 @@ export default function DiaryForm({ uid, displayName, handleModalClose }) {
             className={styles.fileInput}
             type="file"
             id="file"
+            accept="image/*"
             onChange={handleDate}
           />
+          <PreviewImage imageUrl={imgUrl} />
           <button type="submit">등록</button>
         </fieldset>
       </form>

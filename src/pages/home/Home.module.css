@@ -50,36 +50,105 @@
   flex-direction: column;
   border: 1px solid #ccc;
   border-radius: 8px;
-  box-shadow: 3px 3px 5px rgba(50, 50, 50, 0.1);
-  padding: 20px;
+  box-shadow: 0px 3px 5px rgba(50, 50, 50, 0.1);
+  padding: 5px 0px;
 }
 .content_list li + li {
   margin: 20px 0;
 }
 
-.li_content {
+.li_container {
   display: flex;
   justify-content: space-between;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.post {
+  width: 100%;
+}
+
+.post_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  padding: 5px 20px 5px 20px;
+}
+
+.post_header_left {
+  display: flex;
+  align-items: center;
 }
 
 .post_writer {
+  margin-right: 15px;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.post_category {
+  font-size: 0.9em;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.post_optionBtn {
+  position: relative;
+  display: flex;
+  border: none;
+  padding: 7px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.post_optionBtn:hover {
+  background-color: #f0f0f0;
+}
+
+.post_optionBtn_list {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 140px;
+  padding: 10px;
+  top: 25px;
+  right: 15px;
+  background-color: #e5e5e5;
+  border-radius: 8px;
+  border-top-right-radius: 0px;
+  box-shadow: 5px 3px 5px rgba(50, 50, 50, 0.5);
+}
+
+.post_optionBtn_list div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  font-size: 1.1em;
+}
+
+.post_optionBtn_list div:hover {
+  background-color: #ccc;
+}
+
+.post_content_title {
   width: 100%;
-  background-color: yellow;
+  font-size: 1.3em;
+  font-weight: 500;
+  padding: 10px 20px;
   border-bottom: 1px solid #ccc;
 }
 
-.post_title {
-  font-size: 1.3em;
-}
-
-.post_detail {
-  font-size: 1.3em;
+.post_content_detail {
+  font-size: 1em;
+  padding: 0px 20px;
+  line-height: 1.5;
   word-break: break-all;
 }
 
-.content_list .img {
+.post_image {
   width: 100%;
-  cursor: pointer;
 }
 
 .btn {
@@ -143,15 +212,22 @@
   align-items: center;
   flex-direction: column;
   position: absolute;
-  width: 400px;
-  height: 55%;
+  width: 50%;
+  height: auto;
   left: 0;
   right: 0;
   margin: 0 auto;
-  border-radius: 20px;
+  border-radius: 8px;
   z-index: 100;
   background-color: #484646;
   overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .bigImg {
+    width: 100%;
+    top: 50%;
+  }
 }
 
 .bigImg img {
