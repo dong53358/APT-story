@@ -17,6 +17,10 @@
 - firebase auth 이용 ⇒ 이메일 로그인 회원가입 기능 구현, 구글 로그인 기능 구현
 - firebase storage 이용 ⇒ 사진 업로드 기능 구현
 - firebase cloud firestore 이용 ⇒ 게시글 crud 기능 구현
+- 추가예정
+  1. 댓글 기능
+  2. 좋아요 버튼 및 좋아요 누른 게시물 목록
+  3. 사용자 별 my page (프로필사진, 본인 게시글 관리)
 
 ---
 
