@@ -2,7 +2,7 @@
 
 ## 같은 아파트 입주민들의 커뮤니티 웹사이트
 
-## [Homepage](https://mydiary-50193.web.app/)
+## [Homepage](https://mydiary-50193.firebaseapp.com/)
 
 🗓️ **작업기간** : 2022.3.5 ~ ing
 
