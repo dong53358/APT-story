@@ -2,11 +2,19 @@ import React from "react";
 import styles from "./Modal.module.css";
 import WriteForm from "./WriteFome";
 
-const Modal = ({ type, uid, displayName, handleModalClose, item }) => {
+const Modal = ({
+  boardCategory,
+  type,
+  uid,
+  displayName,
+  handleModalClose,
+  item,
+}) => {
   return (
     <>
       <div className={styles.modal_container}>
         <WriteForm
+          boardCategory={boardCategory}
           type={type}
           uid={uid}
           displayName={displayName}

@@ -63,6 +63,10 @@
   font-size: 1em;
 }
 
+.previewImg {
+  width: 100%;
+}
+
 .write_form button {
   display: block;
   width: 100%;

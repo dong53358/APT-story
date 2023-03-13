@@ -5,44 +5,29 @@ import { useFirestore } from "../hooks/useFirestore";
 import { v4 } from "uuid";
 import closeBtn from "../assets/images/closeBtn.png";
 import styles from "./Modal.module.css";
-import PreviewImage from "./PreviewImage";
-
-// function PreviewImage({ imageFile }) {
-//   const [imageUrl, setImageUrl] = useState("''");
-
-//   useEffect(() => {
-//     if (imageFile) {
-//       const reader = new FileReader();
-//       reader.onload = () => {
-//         setImageUrl(reader.result);
-//       };
-//       reader.readAsDataURL(imageFile);
-//     }
-//   }, [imageFile]);
-
-//   return imageUrl ? <img src={imageUrl} alt="preview" /> : null;
-// }
 
 export default function WriteFome({
+  boardCategory,
   type,
   uid,
   displayName,
   handleModalClose,
   item,
 }) {
-  const [category, setCategory] = useState(item?.category || "자유");
+  const [category, setCategory] = useState(item?.category || boardCategory);
   const [title, setTitle] = useState(item?.title || "");
-  const [imageFile, setImage] = useState(item?.imageUrl || "");
-  const [imgUrl, setImgUrl] = useState("");
+  const [imageFile, setImageFile] = useState("");
+  const [previewImg, setPreviewImg] = useState(item?.imageUrl || "");
   const [text, setText] = useState(item?.text || "");
-  const [isEditClicked] = useState(false);
-  const { addDocument, updateDocument, response } = useFirestore("board");
-  console.log(imageFile);
+  const { addDocument, updateDocument, updateDocument_img, response } =
+    useFirestore("board");
+
   useEffect(() => {
     if (response.success) {
       setTitle("");
       setText("");
-      setCategory("자유");
+      setCategory(boardCategory);
+      setImageFile("");
     }
   }, [response.success]);
 
@@ -52,16 +37,16 @@ export default function WriteFome({
     } else if (event.target.id === "txt") {
       setText(event.target.value);
     } else if (event.target.id === "file") {
-      setImage(event.target.files[0]);
+      setImageFile(event.target.files[0]);
     }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    // add
     if (type === "ADD") {
-      if (imageFile == null) {
-        addDocument({ uid, displayName, category, title, text, isEditClicked });
-
+      if (imageFile === "") {
+        addDocument({ uid, displayName, category, title, text });
         handleModalClose();
         return;
       }
@@ -82,8 +67,14 @@ export default function WriteFome({
         text,
         imageUrl,
         imgName,
-        isEditClicked,
+        // imageFile,
       });
+      handleModalClose();
+      return;
+    }
+    // update
+    if (imageFile === "") {
+      updateDocument(item.id, title, text, category);
       handleModalClose();
       return;
     }
@@ -94,7 +85,15 @@ export default function WriteFome({
     await uploadBytes(imageRef, imageFile);
 
     imageUrl = await getDownloadURL(imageRef);
-    updateDocument(item.id, title, text, category, imageUrl, imgName);
+    updateDocument_img(
+      item.id,
+      title,
+      text,
+      category,
+      imageUrl,
+      imgName
+      // imageFile
+    );
 
     handleModalClose();
   };
@@ -103,7 +102,7 @@ export default function WriteFome({
     if (imageFile) {
       const reader = new FileReader();
       reader.onload = () => {
-        setImgUrl(reader.result);
+        setPreviewImg(reader.result);
       };
       reader.readAsDataURL(imageFile);
     }
@@ -153,7 +152,9 @@ export default function WriteFome({
             accept="image/*"
             onChange={handleDate}
           />
-          <PreviewImage imageUrl={imgUrl} />
+          {previewImg && (
+            <img src={previewImg} alt="preview" className={styles.previewImg} />
+          )}
           <button type="submit">등록</button>
         </fieldset>
       </form>

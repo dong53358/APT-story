@@ -7,7 +7,6 @@ import styles from "./Header.module.css";
 export default function Header() {
   const { logout } = useLogout();
   const { user } = useAuthContext();
-  console.log(user);
 
   return (
     <>

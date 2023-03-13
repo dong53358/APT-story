@@ -91,6 +91,11 @@
 .post_category {
   font-size: 0.9em;
   color: rgba(0, 0, 0, 0.5);
+  margin-right: 15px;
+}
+
+.post_createdTime {
+  font-size: 0.9em;
 }
 
 .post_optionBtn {

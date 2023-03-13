@@ -8,38 +8,26 @@ import threeDots from "../../assets/images/threeDots.png";
 import Modal from "../../components/Modal";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
-export function BoardItem({ item, imgClick }) {
+export function BoardItem({ boardCategory, item, imgClick }) {
   const { user } = useAuthContext();
   const [isOptionBtnClick, setIsOptionBtnClick] = useState(false);
   const [isEditClicked, setIsEditClicked] = useState(false);
   const actionsRef = useRef(null);
 
-  const { deleteDocument, updateDocumentEditCliked, updateDocument } =
-    useFirestore("board");
+  const { deleteDocument } = useFirestore("board");
 
   const handleEditModalOpen = () => {
     setIsEditClicked(true);
+    document.body.classList.add(styles["modal-open"]);
   };
 
   const handleEditModalClose = () => {
     setIsEditClicked(false);
+    document.body.classList.remove(styles["modal-open"]);
   };
-
-  const [newTitle, setNewTitle] = useState(item.title);
-  const [newText, setNewText] = useState(item.text);
 
   const handleOptionBtnClick = () => {
     setIsOptionBtnClick((prev) => !prev);
-  };
-
-  const editInputRef = useRef(null);
-
-  const onChangeEditInput = (e) => {
-    if (e.target.id === "tit") {
-      setNewTitle(e.target.value);
-    } else if (e.target.id === "txt") {
-      setNewText(e.target.value);
-    }
   };
 
   useEffect(() => {
@@ -55,6 +43,16 @@ export function BoardItem({ item, imgClick }) {
     };
   }, []);
 
+  const timeConversion = (timestamp) => {
+    const offset = new Date().getTimezoneOffset(); // -540 (UTC+9:00의 오프셋)
+
+    const date = new Date(
+      timestamp.seconds * 1000 +
+        timestamp.nanoseconds / 1000000 -
+        offset * 60 * 1000
+    );
+    return date.toISOString().slice(0, 16);
+  };
   return (
     <>
       <li className={styles.li_container}>
@@ -65,6 +63,9 @@ export function BoardItem({ item, imgClick }) {
                 작성자 : {item.displayName}
               </div>
               <div className={styles.post_category}>{item.category}</div>
+              <div className={styles.post_createdTime}>
+                {timeConversion(item.createdTime)}
+              </div>
             </div>
             <div>
               <button
@@ -125,63 +126,10 @@ export function BoardItem({ item, imgClick }) {
             )}
           </div>
         </div>
-        {/* {<form
-                  className={styles.editForm}
-                  onSubmit={(event) => {
-                    event.preventDefault();
-                    updateDocumentEditCliked(item.id, item.isEditClicked);
-                  }}
-                >
-                  <textarea
-                    type="text"
-                    id="tit"
-                    className={styles.editInput}
-                    value={newTitle}
-                    ref={editInputRef}
-                    onChange={onChangeEditInput}
-                  />
-                  <textarea
-                    type="text"
-                    id="txt"
-                    className={styles.editInput}
-                    value={newText}
-                    ref={editInputRef}
-                    onChange={onChangeEditInput}
-                  />
-                  <button
-                    type="submit"
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      updateDocument(item.id, newTitle, newText);
-                    }}
-                  >
-                    <FaCheck />
-                  </button>
-                </form>} */}
-        {/* <div className={styles.btn}>
-              <button
-                type="button"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  updateDocumentEditCliked(item.id, item.isEditClicked);
-                }}
-              >
-                <FaEdit />
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  const desertRef = ref(storage, `images/${item.imgName}`);
-                  deleteDocument(item.id);
-                  if (item.imgName) deleteObject(desertRef);
-                }}
-              >
-                <FaTrashAlt />
-              </button>
-            </div> */}
       </li>
       {isEditClicked && (
         <Modal
+          boardCategory={boardCategory}
           type="EDIT"
           uid={user.uid}
           displayName={user.displayName}
