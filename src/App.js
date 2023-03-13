@@ -46,19 +46,25 @@ function App() {
                   element={
                     user ? <Free /> : <Navigate replace={true} to="/login" />
                   }
-                ></Route>
+                >
+                  <Route path="/free/img/:Id" element={<Free />}></Route>
+                </Route>
                 <Route
                   path="/info"
                   element={
                     user ? <Info /> : <Navigate replace={true} to="/login" />
                   }
-                ></Route>
+                >
+                  <Route path="/info/img/:Id" element={<Info />}></Route>
+                </Route>
                 <Route
                   path="/quest"
                   element={
                     user ? <Quest /> : <Navigate replace={true} to="/login" />
                   }
-                ></Route>
+                >
+                  <Route path="/quest/img/:Id" element={<Quest />}></Route>
+                </Route>
               </Routes>
             </div>
           </>

@@ -20,22 +20,22 @@ export default function Free() {
   ]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
-  const imgMatch = useMatch(`/img/:imgId`);
+  const imgMatch = useMatch(`/free/img/:imgId`);
   const navigate = useNavigate();
   const { scrollY } = useScroll();
 
   const imgClick = (imgId, imgUrl) => {
-    navigate(`/img/${imgId}`);
     setImgUrl(imgUrl);
+    navigate(`/free/img/${imgId}`);
     document.body.classList.add(styles["modal-open"]);
   };
   const onOverlayClick = () => {
     document.body.classList.remove(styles["modal-open"]);
-    navigate("/");
+    navigate("/free");
   };
   const closeBtnClick = () => {
     document.body.classList.remove(styles["modal-open"]);
-    navigate("/");
+    navigate("/free");
   };
   const handleModalOpen = () => {
     setIsModalOpen(true);

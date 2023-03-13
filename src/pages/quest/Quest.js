@@ -20,22 +20,22 @@ export default function Quest() {
   ]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
-  const imgMatch = useMatch(`/img/:imgId`);
+  const imgMatch = useMatch(`/quest/img/:imgId`);
   const navigate = useNavigate();
   const { scrollY } = useScroll();
 
   const imgClick = (imgId, imgUrl) => {
-    navigate(`/img/${imgId}`);
     setImgUrl(imgUrl);
+    navigate(`/quest/img/${imgId}`);
     document.body.classList.add(styles["modal-open"]);
   };
   const onOverlayClick = () => {
     document.body.classList.remove(styles["modal-open"]);
-    navigate("/");
+    navigate("/quest");
   };
   const closeBtnClick = () => {
     document.body.classList.remove(styles["modal-open"]);
-    navigate("/");
+    navigate("/quest");
   };
   const handleModalOpen = () => {
     setIsModalOpen(true);

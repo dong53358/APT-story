@@ -19,8 +19,8 @@ export default function Home() {
   const { scrollY } = useScroll();
 
   const imgClick = (imgId, imgUrl) => {
-    navigate(`/img/${imgId}`);
     setImgUrl(imgUrl);
+    navigate(`/img/${imgId}`);
     document.body.classList.add(styles["modal-open"]);
   };
   const onOverlayClick = () => {
