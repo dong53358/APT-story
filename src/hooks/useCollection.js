@@ -23,7 +23,12 @@ export const useCollection = (transaction, myQuery) => {
     }
 
     const unsubscribe = onSnapshot(
-      myQuery ? q : collection(appFireStore, transaction),
+      myQuery
+        ? q
+        : query(
+            collection(appFireStore, transaction),
+            orderBy("createdTime", "desc")
+          ),
       (snapshot) => {
         let result = [];
         snapshot.docs.forEach((doc) => {

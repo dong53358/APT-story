@@ -1,42 +1,16 @@
 import { Link, useMatch } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { useLogout } from "../hooks/useLogout";
 import styles from "./Nav.module.css";
 
 export default function Nav() {
-  const { logout } = useLogout();
   const { user } = useAuthContext();
   const homeMatch = useMatch("/");
-  const todoMatch = useMatch("/todo");
+  const infoMatch = useMatch("/info");
+  const questMatch = useMatch("/quest");
+  const freeMatch = useMatch("/free");
+
   return (
     <>
-      <nav className={styles.nav}>
-        <h1 className={styles.title}>
-          <Link to="/">My Diary</Link>
-        </h1>
-        <ul className={styles.list_nav}>
-          {!user && (
-            <>
-              <li>
-                <Link to="/login">로그인</Link>
-              </li>
-              <li>
-                <Link to="/signup">회원가입</Link>
-              </li>
-            </>
-          )}
-          {user && (
-            <li>
-              <strong className={styles.userName}>
-                환영합니다 {user.displayName}님
-              </strong>
-              <button type="button" onClick={logout}>
-                로그아웃
-              </button>
-            </li>
-          )}
-        </ul>
-      </nav>
       <div className={styles.nav_menu}>
         {user && (
           <>
@@ -49,13 +23,32 @@ export default function Nav() {
                 Home
               </div>
             </Link>
-            <Link to="/todo">
+
+            <Link to="/free">
               <div
                 className={
-                  todoMatch ? styles.nav_menu_li_click : styles.nav_menu_li
+                  freeMatch ? styles.nav_menu_li_click : styles.nav_menu_li
                 }
               >
-                To Do list
+                자유
+              </div>
+            </Link>
+            <Link to="/info">
+              <div
+                className={
+                  infoMatch ? styles.nav_menu_li_click : styles.nav_menu_li
+                }
+              >
+                정보공유
+              </div>
+            </Link>
+            <Link to="/quest">
+              <div
+                className={
+                  questMatch ? styles.nav_menu_li_click : styles.nav_menu_li
+                }
+              >
+                질문
               </div>
             </Link>
           </>

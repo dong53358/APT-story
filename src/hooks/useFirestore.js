@@ -80,66 +80,50 @@ export const useFirestore = (transaction) => {
       dispatch({ type: "error", payload: error.message });
     }
   };
-
   // 컬렉션에서 문서를 수정합니다.
-  const updateDocumentCliked = async (id, isClicked) => {
-    dispatch({ type: "isPending" });
-    try {
-      const createdTime = timestamp.fromDate(new Date());
-      const docRef = await updateDoc(doc(colRef, id), {
-        isClicked: isClicked ? false : true,
-        createdTime,
-      });
-      dispatch({ type: "updateDoc", payload: docRef });
-    } catch (error) {
-      dispatch({ type: "error", payload: error.message });
-    }
-  };
-
-  const updateDocumentEditCliked = async (id, isEditClicked) => {
+  const updateDocument = async (id, title, text, category) => {
     dispatch({ type: "isPending" });
     try {
       const docRef = await updateDoc(doc(colRef, id), {
-        isEditClicked: isEditClicked ? false : true,
-      });
-      dispatch({ type: "updateDoc", payload: docRef });
-    } catch (error) {
-      dispatch({ type: "error", payload: error.message });
-    }
-  };
-
-  const updateDocument = async (id, title, text) => {
-    dispatch({ type: "isPending" });
-    try {
-      const docRef = await updateDoc(doc(colRef, id), {
-        isEditClicked: true,
         title: title,
         text: text,
+        category: category,
       });
       dispatch({ type: "updateDoc", payload: docRef });
     } catch (error) {
       dispatch({ type: "error", payload: error.message });
     }
   };
-  const updateTodoDocument = async (id, title) => {
+
+  // 컬렉션에서 문서를 수정합니다 + 이미지.
+  const updateDocument_img = async (
+    id,
+    title,
+    text,
+    category,
+    imageUrl,
+    imgName
+  ) => {
     dispatch({ type: "isPending" });
     try {
       const docRef = await updateDoc(doc(colRef, id), {
-        isEditClicked: true,
         title: title,
+        text: text,
+        category: category,
+        imageUrl: imageUrl,
+        imgName: imgName,
       });
       dispatch({ type: "updateDoc", payload: docRef });
     } catch (error) {
       dispatch({ type: "error", payload: error.message });
     }
   };
+
   return {
     addDocument,
     deleteDocument,
     updateDocument,
-    updateTodoDocument,
-    updateDocumentCliked,
-    updateDocumentEditCliked,
+    updateDocument_img,
     response,
   };
 };

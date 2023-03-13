@@ -1,17 +1,23 @@
+import React from "react";
+import styles from "./Quest.module.css";
+
 import { useMatch, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
-import BoardList from "./BoardList";
-import styles from "./Home.module.css";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { useState } from "react";
 import { FaWindowClose } from "react-icons/fa";
 import Modal from "../../components/Modal";
+import BoardList from "../home/BoardList";
 
-export default function Home() {
+export default function Quest() {
   const { user } = useAuthContext();
-  const { documents, error } = useCollection("diary", ["uid", "==", user.uid]);
-  const { documents: documents2, error: error2 } = useCollection("board");
+  const boardCategory = "질문";
+  const { documents, error } = useCollection("board", [
+    "category",
+    "==",
+    boardCategory,
+  ]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
   const imgMatch = useMatch(`/img/:imgId`);
@@ -47,12 +53,19 @@ export default function Home() {
           <button onClick={handleModalOpen}>글쓰기</button>
         </div>
         <ul className={styles.content_list}>
-          {error2 && <strong>{error2}</strong>}
-          {documents2 && <BoardList diaries={documents2} imgClick={imgClick} />}
+          {error && <strong>{error}</strong>}
+          {documents && (
+            <BoardList
+              boardCategory={boardCategory}
+              diaries={documents}
+              imgClick={imgClick}
+            />
+          )}
         </ul>
       </main>
       {isModalOpen && (
         <Modal
+          boardCategory={boardCategory}
           type="ADD"
           handleModalClose={handleModalClose}
           uid={user.uid}

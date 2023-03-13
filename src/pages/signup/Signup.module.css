@@ -1,7 +1,27 @@
+.signup_head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px auto;
+}
+
+.signup_head span:first-child {
+  font-size: 3em;
+  font-weight: bold;
+  color: rgb(30, 55, 153);
+  margin-bottom: 30px;
+}
+
+.signup_head span:nth-child(2) {
+  font-size: 2em;
+  padding: 0px 25px;
+}
+
 .signup_form {
   width: 454px;
   height: 354px;
-  margin: 60px auto;
+  margin: 0px auto;
+  margin-top: 67px;
 }
 
 @media (max-width: 600px) {
@@ -53,7 +73,7 @@
 .signup_form button {
   width: 100%;
   margin-top: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   float: right;
   padding: 15px 0px;
   border-radius: 5px;
@@ -68,4 +88,22 @@
 .signup_form_error {
   color: red;
   font-size: 1em;
+}
+
+.link_login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  background-color: #f0f2f5;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  width: 100px;
+}
+
+.link_login a {
+  text-decoration: none;
+  color: #515151;
+  font-size: 1.3em;
 }
