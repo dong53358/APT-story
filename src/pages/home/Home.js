@@ -10,7 +10,6 @@ import Modal from "../../components/Modal";
 
 export default function Home() {
   const { user } = useAuthContext();
-  const { documents, error } = useCollection("diary", ["uid", "==", user.uid]);
   const { documents: documents2, error: error2 } = useCollection("board");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
