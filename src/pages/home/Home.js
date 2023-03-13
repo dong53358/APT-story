@@ -10,6 +10,7 @@ import Modal from "../../components/Modal";
 
 export default function Home() {
   const { user } = useAuthContext();
+  const boardCategory = "자유";
   const { documents: documents2, error: error2 } = useCollection("board");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
@@ -47,11 +48,18 @@ export default function Home() {
         </div>
         <ul className={styles.content_list}>
           {error2 && <strong>{error2}</strong>}
-          {documents2 && <BoardList diaries={documents2} imgClick={imgClick} />}
+          {documents2 && (
+            <BoardList
+              boardCategory={boardCategory}
+              diaries={documents2}
+              imgClick={imgClick}
+            />
+          )}
         </ul>
       </main>
       {isModalOpen && (
         <Modal
+          boardCategory={boardCategory}
           type="ADD"
           handleModalClose={handleModalClose}
           uid={user.uid}
