@@ -1,12 +1,12 @@
 import { useMatch, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
-import BoardList from "./BoardList";
 import styles from "./Home.module.css";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { useState } from "react";
 import { FaWindowClose } from "react-icons/fa";
-import Modal from "../../components/Modal";
+import BoardList from "../../components/boardList/BoardList";
+import Modal from "../../components/modal/Modal";
 
 export default function Home() {
   const { user } = useAuthContext();

@@ -1,5 +1,5 @@
 import { Link, useMatch } from "react-router-dom";
-import { useAuthContext } from "../hooks/useAuthContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
 import styles from "./Nav.module.css";
 
 export default function Nav() {

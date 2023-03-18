@@ -1,4 +1,4 @@
-import { BoardItem } from "./BoardItem";
+import { BoardItem } from "../boardItem/BoardItem";
 
 export default function BoardList({ boardCategory, diaries, imgClick }) {
   return (

@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { useFirestore } from "../../hooks/useFirestore";
-import styles from "./Home.module.css";
+import styles from "../boardItem/BoardItem.module.css";
 import { deleteObject, ref } from "firebase/storage";
 import { storage } from "../../firebase/config";
 import threeDots from "../../assets/images/threeDots.png";
-import Modal from "../../components/Modal";
+import Modal from "../modal/Modal";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
 export function BoardItem({ boardCategory, item, imgClick }) {

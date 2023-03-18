@@ -7,8 +7,8 @@ import { useCollection } from "../../hooks/useCollection";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { useState } from "react";
 import { FaWindowClose } from "react-icons/fa";
-import Modal from "../../components/Modal";
-import BoardList from "../home/BoardList";
+import BoardList from "../../components/boardList/BoardList";
+import Modal from "../../components/modal/Modal";
 
 export default function Info() {
   const { user } = useAuthContext();
