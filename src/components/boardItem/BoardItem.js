@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { FaEdit, FaHeart, FaRegCommentAlt, FaTrashAlt } from "react-icons/fa";
 import { useFirestore } from "../../hooks/useFirestore";
 import styles from "../boardItem/BoardItem.module.css";
 import { deleteObject, ref } from "firebase/storage";
@@ -7,11 +7,14 @@ import { storage } from "../../firebase/config";
 import threeDots from "../../assets/images/threeDots.png";
 import Modal from "../modal/Modal";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import Comments from "../comments/Comments";
 
 export function BoardItem({ boardCategory, item, imgClick }) {
   const { user } = useAuthContext();
   const [isOptionBtnClick, setIsOptionBtnClick] = useState(false);
   const [isEditClicked, setIsEditClicked] = useState(false);
+  const [isCommentsClicked, setIsCommentsClicked] = useState(false);
+
   const actionsRef = useRef(null);
 
   const { deleteDocument } = useFirestore("board");
@@ -28,6 +31,10 @@ export function BoardItem({ boardCategory, item, imgClick }) {
 
   const handleOptionBtnClick = () => {
     setIsOptionBtnClick((prev) => !prev);
+  };
+
+  const handleCommentsOpen = () => {
+    setIsCommentsClicked((prev) => !prev);
   };
 
   useEffect(() => {
@@ -125,7 +132,25 @@ export function BoardItem({ boardCategory, item, imgClick }) {
               />
             )}
           </div>
+          <div className={styles.post_btn_container}>
+            <div className={styles.post_like_btn}>
+              <span>
+                <FaHeart />
+              </span>
+              <span>좋아요</span>
+            </div>
+            <div
+              className={styles.post_comment_btn}
+              onClick={handleCommentsOpen}
+            >
+              <span>
+                <FaRegCommentAlt />
+              </span>
+              <span>댓글 보기</span>
+            </div>
+          </div>
         </div>
+        {isCommentsClicked && <Comments />}
       </li>
       {isEditClicked && (
         <Modal
