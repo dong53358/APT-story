@@ -7,13 +7,13 @@ import { useCollection } from "../../hooks/useCollection";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { useState } from "react";
 import { FaWindowClose } from "react-icons/fa";
-import Modal from "../../components/Modal";
-import BoardList from "../home/BoardList";
+import BoardList from "../../components/boardList/BoardList";
+import Modal from "../../components/modal/Modal";
 
 export default function Info() {
   const { user } = useAuthContext();
   const boardCategory = "정보공유";
-  const { documents, error } = useCollection("board", [
+  const { documents: infoBoardData, error } = useCollection("board", [
     "category",
     "==",
     boardCategory,
@@ -54,10 +54,10 @@ export default function Info() {
         </div>
         <ul className={styles.content_list}>
           {error && <strong>{error}</strong>}
-          {documents && (
+          {infoBoardData && (
             <BoardList
               boardCategory={boardCategory}
-              diaries={documents}
+              boardData={infoBoardData}
               imgClick={imgClick}
             />
           )}

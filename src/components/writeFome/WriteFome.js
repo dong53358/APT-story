@@ -1,10 +1,10 @@
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useEffect, useState } from "react";
-import { storage } from "../firebase/config";
-import { useFirestore } from "../hooks/useFirestore";
+import { storage } from "../../firebase/config";
+import { useFirestore } from "../../hooks/useFirestore";
 import { v4 } from "uuid";
-import closeBtn from "../assets/images/closeBtn.png";
-import styles from "./Modal.module.css";
+import closeBtn from "../../assets/images/closeBtn.png";
+import styles from "../writeFome/WriteFome.module.css";
 
 export default function WriteFome({
   boardCategory,

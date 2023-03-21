@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./Modal.module.css";
-import WriteForm from "./WriteFome";
+import styles from "../modal/Modal.module.css";
+import WriteForm from "../writeFome/WriteFome";
 
 const Modal = ({
   boardCategory,

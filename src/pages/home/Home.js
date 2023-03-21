@@ -1,17 +1,17 @@
 import { useMatch, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
-import BoardList from "./BoardList";
 import styles from "./Home.module.css";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { useState } from "react";
 import { FaWindowClose } from "react-icons/fa";
-import Modal from "../../components/Modal";
+import BoardList from "../../components/boardList/BoardList";
+import Modal from "../../components/modal/Modal";
 
 export default function Home() {
   const { user } = useAuthContext();
   const boardCategory = "자유";
-  const { documents: documents2, error: error2 } = useCollection("board");
+  const { documents: boardData, error } = useCollection("board");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
   const imgMatch = useMatch(`/img/:imgId`);
@@ -47,11 +47,11 @@ export default function Home() {
           <button onClick={handleModalOpen}>글쓰기</button>
         </div>
         <ul className={styles.content_list}>
-          {error2 && <strong>{error2}</strong>}
-          {documents2 && (
+          {error && <strong>{error}</strong>}
+          {boardData && (
             <BoardList
               boardCategory={boardCategory}
-              diaries={documents2}
+              boardData={boardData}
               imgClick={imgClick}
             />
           )}

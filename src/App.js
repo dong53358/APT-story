@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Header from "./components/Header";
+import Header from "./components/header/Header";
 import { useAuthContext } from "./hooks/useAuthContext";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
-import Nav from "./components/Nav";
+import Nav from "./components/nav/Nav";
 import styles from "./App.module.css";
 import Info from "./pages/info/Info";
 import Free from "./pages/free/Free";

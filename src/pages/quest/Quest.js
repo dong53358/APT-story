@@ -7,13 +7,13 @@ import { useCollection } from "../../hooks/useCollection";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { useState } from "react";
 import { FaWindowClose } from "react-icons/fa";
-import Modal from "../../components/Modal";
-import BoardList from "../home/BoardList";
+import Modal from "../../components/modal/Modal";
+import BoardList from "../../components/boardList/BoardList";
 
 export default function Quest() {
   const { user } = useAuthContext();
   const boardCategory = "질문";
-  const { documents, error } = useCollection("board", [
+  const { documents: questBoardData, error } = useCollection("board", [
     "category",
     "==",
     boardCategory,
@@ -54,10 +54,10 @@ export default function Quest() {
         </div>
         <ul className={styles.content_list}>
           {error && <strong>{error}</strong>}
-          {documents && (
+          {questBoardData && (
             <BoardList
               boardCategory={boardCategory}
-              diaries={documents}
+              boardData={questBoardData}
               imgClick={imgClick}
             />
           )}

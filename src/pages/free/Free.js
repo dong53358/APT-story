@@ -7,13 +7,13 @@ import { useCollection } from "../../hooks/useCollection";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { useState } from "react";
 import { FaWindowClose } from "react-icons/fa";
-import Modal from "../../components/Modal";
-import BoardList from "../home/BoardList";
+import Modal from "../../components/modal/Modal";
+import BoardList from "../../components/boardList/BoardList";
 
 export default function Free() {
   const { user } = useAuthContext();
   const boardCategory = "자유";
-  const { documents, error } = useCollection("board", [
+  const { documents: freeBoardData, error } = useCollection("board", [
     "category",
     "==",
     boardCategory,
@@ -54,10 +54,10 @@ export default function Free() {
         </div>
         <ul className={styles.content_list}>
           {error && <strong>{error}</strong>}
-          {documents && (
+          {freeBoardData && (
             <BoardList
               boardCategory={boardCategory}
-              diaries={documents}
+              boardData={freeBoardData}
               imgClick={imgClick}
             />
           )}
