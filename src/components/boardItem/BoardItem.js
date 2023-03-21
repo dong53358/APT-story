@@ -8,16 +8,24 @@ import threeDots from "../../assets/images/threeDots.png";
 import Modal from "../modal/Modal";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import Comments from "../comments/Comments";
+import { timeConversion } from "../../utils/timeConversion";
+import { useCollection } from "../../hooks/useCollection";
 
 export function BoardItem({ boardCategory, item, imgClick }) {
   const { user } = useAuthContext();
   const [isOptionBtnClick, setIsOptionBtnClick] = useState(false);
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isCommentsClicked, setIsCommentsClicked] = useState(false);
+  const { documents: commentsData, error } = useCollection(
+    "comments",
+    ["boardId", "==", item.id],
+    "asc"
+  );
 
   const actionsRef = useRef(null);
 
   const { deleteDocument } = useFirestore("board");
+  const { deleteDocument: deleteComments } = useFirestore("comments");
 
   const handleEditModalOpen = () => {
     setIsEditClicked(true);
@@ -50,16 +58,6 @@ export function BoardItem({ boardCategory, item, imgClick }) {
     };
   }, []);
 
-  const timeConversion = (timestamp) => {
-    const offset = new Date().getTimezoneOffset(); // -540 (UTC+9:00의 오프셋)
-
-    const date = new Date(
-      timestamp.seconds * 1000 +
-        timestamp.nanoseconds / 1000000 -
-        offset * 60 * 1000
-    );
-    return date.toISOString().slice(0, 16);
-  };
   return (
     <>
       <li className={styles.li_container}>
@@ -102,12 +100,21 @@ export function BoardItem({ boardCategory, item, imgClick }) {
                           alert("본인의 게시물만 삭제하실 수 있습니다.");
                           return;
                         }
-                        const desertRef = ref(
-                          storage,
-                          `images/${item.imgName}`
-                        );
-                        deleteDocument(item.id);
-                        if (item.imgName) deleteObject(desertRef);
+                        // eslint-disable-next-line no-restricted-globals
+                        if (confirm("정말 삭제하시겠습니까?")) {
+                          const desertRef = ref(
+                            storage,
+                            `images/${item.imgName}`
+                          );
+
+                          deleteDocument(item.id);
+                          for (let comment of commentsData) {
+                            deleteComments(comment.id);
+                          }
+                          if (item.imgName) deleteObject(desertRef);
+                        } else {
+                          return;
+                        }
                       }}
                     >
                       <span>
@@ -122,7 +129,16 @@ export function BoardItem({ boardCategory, item, imgClick }) {
           </div>
           <div className={styles.post_content}>
             <div className={styles.post_content_title}>{item.title}</div>
-            <p className={styles.post_content_detail}>{item.text}</p>
+            <p className={styles.post_content_detail}>
+              {item.text.split("\n").map((line, index) => {
+                return (
+                  <span key={index}>
+                    {line}
+                    <br />
+                  </span>
+                );
+              })}
+            </p>
             {item.imageUrl && (
               <img
                 src={item.imageUrl}
@@ -150,7 +166,13 @@ export function BoardItem({ boardCategory, item, imgClick }) {
             </div>
           </div>
         </div>
-        {isCommentsClicked && <Comments />}
+        {isCommentsClicked && (
+          <Comments
+            commentsData={commentsData}
+            boardId={item.id}
+            error={error}
+          />
+        )}
       </li>
       {isEditClicked && (
         <Modal

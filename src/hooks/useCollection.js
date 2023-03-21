@@ -8,7 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import { appFireStore } from "../firebase/config";
 
-export const useCollection = (transaction, myQuery) => {
+export const useCollection = (transaction, myQuery, mySort) => {
   const [documents, setDocuments] = useState(null);
   const [error, setError] = useState(null);
 
@@ -18,7 +18,7 @@ export const useCollection = (transaction, myQuery) => {
       q = query(
         collection(appFireStore, transaction),
         where(...myQuery),
-        orderBy("createdTime", "desc")
+        orderBy("createdTime", mySort ? mySort : "desc")
       );
     }
 
