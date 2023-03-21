@@ -13,7 +13,7 @@ import BoardList from "../../components/boardList/BoardList";
 export default function Quest() {
   const { user } = useAuthContext();
   const boardCategory = "질문";
-  const { documents, error } = useCollection("board", [
+  const { documents: questBoardData, error } = useCollection("board", [
     "category",
     "==",
     boardCategory,
@@ -54,10 +54,10 @@ export default function Quest() {
         </div>
         <ul className={styles.content_list}>
           {error && <strong>{error}</strong>}
-          {documents && (
+          {questBoardData && (
             <BoardList
               boardCategory={boardCategory}
-              diaries={documents}
+              boardData={questBoardData}
               imgClick={imgClick}
             />
           )}

@@ -11,7 +11,7 @@ import Modal from "../../components/modal/Modal";
 export default function Home() {
   const { user } = useAuthContext();
   const boardCategory = "자유";
-  const { documents: documents2, error: error2 } = useCollection("board");
+  const { documents: boardData, error } = useCollection("board");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
   const imgMatch = useMatch(`/img/:imgId`);
@@ -47,11 +47,11 @@ export default function Home() {
           <button onClick={handleModalOpen}>글쓰기</button>
         </div>
         <ul className={styles.content_list}>
-          {error2 && <strong>{error2}</strong>}
-          {documents2 && (
+          {error && <strong>{error}</strong>}
+          {boardData && (
             <BoardList
               boardCategory={boardCategory}
-              diaries={documents2}
+              boardData={boardData}
               imgClick={imgClick}
             />
           )}

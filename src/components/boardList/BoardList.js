@@ -1,9 +1,9 @@
 import { BoardItem } from "../boardItem/BoardItem";
 
-export default function BoardList({ boardCategory, diaries, imgClick }) {
+export default function BoardList({ boardCategory, boardData, imgClick }) {
   return (
     <>
-      {diaries.map((item) => {
+      {boardData.map((item) => {
         return (
           <BoardItem
             key={item.id}
