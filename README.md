@@ -38,7 +38,7 @@
 
 ## ● 홈 화면 (전체 게시글)
 
-![스크린샷 2023-03-13 오후 3 19 20](https://user-images.githubusercontent.com/82385282/224622951-e51ea399-9a2f-4db7-ae71-f0d3ea8be570.png)
+![스크린샷 2023-03-22 오전 1 31 41](https://user-images.githubusercontent.com/82385282/226677324-3c907671-6d64-4e33-b980-0db4294115e4.png)
 
 ---
 
