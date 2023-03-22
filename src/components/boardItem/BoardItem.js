@@ -24,8 +24,19 @@ export function BoardItem({ boardCategory, item, imgClick }) {
 
   const actionsRef = useRef(null);
 
-  const { deleteDocument } = useFirestore("board");
+  const { updateLikeList, deleteDocument } = useFirestore("board");
   const { deleteDocument: deleteComments } = useFirestore("comments");
+
+  const handleLikeBtnClick = () => {
+    if (item.likeList.includes(user.uid)) {
+      const newLikeList = JSON.parse(JSON.stringify(item.likeList));
+      const index = newLikeList.indexOf(user.id);
+      newLikeList.splice(index, 1);
+      updateLikeList(item.id, [...newLikeList]);
+      return;
+    }
+    updateLikeList(item.id, [...item?.likeList, user.uid]);
+  };
 
   const handleEditModalOpen = () => {
     setIsEditClicked(true);
@@ -129,9 +140,11 @@ export function BoardItem({ boardCategory, item, imgClick }) {
           </div>
           <div className={styles.post_content}>
             <div className={styles.post_content_title}>
-              <span>{item.title}</span>{" "}
+              <span>{item.title}</span>
               <span className={styles.post_comment_count}>
-                {commentsData.length === 0 ? null : `[${commentsData.length}]`}
+                {commentsData?.length === 0
+                  ? null
+                  : `[${commentsData?.length}]`}
               </span>
             </div>
             <p className={styles.post_content_detail}>
@@ -154,8 +167,14 @@ export function BoardItem({ boardCategory, item, imgClick }) {
             )}
           </div>
           <div className={styles.post_btn_container}>
-            <div className={styles.post_like_btn}>
-              <span>
+            <div className={styles.post_like_btn} onClick={handleLikeBtnClick}>
+              <span
+                className={
+                  item.likeList.includes(user.uid)
+                    ? styles.post_like_btn_heart_red
+                    : null
+                }
+              >
                 <FaHeart />
               </span>
               <span>좋아요</span>

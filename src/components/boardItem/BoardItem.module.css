@@ -239,6 +239,10 @@
   font-size: 1em;
 }
 
+.post_like_btn_heart_red {
+  color: red;
+}
+
 .post_comment_btn {
   display: flex;
   justify-content: center;

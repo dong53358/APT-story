@@ -63,7 +63,8 @@ export const useFirestore = (transaction) => {
     dispatch({ type: "isPending" });
     try {
       const createdTime = timestamp.fromDate(new Date());
-      const docRef = await addDoc(colRef, { ...doc, createdTime });
+      let likeList = [];
+      const docRef = await addDoc(colRef, { ...doc, createdTime, likeList });
       dispatch({ type: "addDoc", payload: docRef });
     } catch (error) {
       dispatch({ type: "error", payload: error.message });
@@ -133,12 +134,26 @@ export const useFirestore = (transaction) => {
     }
   };
 
+  // 좋아요 버튼 클릭한 사용자 추가
+  const updateLikeList = async (id, likeList) => {
+    dispatch({ type: "isPending" });
+    try {
+      const docRef = await updateDoc(doc(colRef, id), {
+        likeList: [...likeList],
+      });
+      dispatch({ type: "updateDoc", payload: docRef });
+    } catch (error) {
+      dispatch({ type: "error", payload: error.message });
+    }
+  };
+
   return {
     addDocument,
     deleteDocument,
     updateDocument,
     updateDocument_img,
     updateComment,
+    updateLikeList,
     response,
   };
 };
