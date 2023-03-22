@@ -78,11 +78,19 @@
 }
 
 .post_content_title {
+  display: flex;
+  align-items: center;
   width: 100%;
   font-size: 1.3em;
   font-weight: 500;
   padding: 10px 20px;
   border-bottom: 1px solid #ccc;
+}
+
+.post_comment_count {
+  margin-left: 5px;
+  color: rgb(255, 123, 0);
+  font-size: 0.8em;
 }
 
 .post_content_detail {
@@ -229,6 +237,10 @@
 .post_like_btn span {
   margin-right: 5px;
   font-size: 1em;
+}
+
+.post_like_btn_heart_red {
+  color: red;
 }
 
 .post_comment_btn {
