@@ -128,7 +128,12 @@ export function BoardItem({ boardCategory, item, imgClick }) {
             </div>
           </div>
           <div className={styles.post_content}>
-            <div className={styles.post_content_title}>{item.title}</div>
+            <div className={styles.post_content_title}>
+              <span>{item.title}</span>{" "}
+              <span className={styles.post_comment_count}>
+                {commentsData.length === 0 ? null : `[${commentsData.length}]`}
+              </span>
+            </div>
             <p className={styles.post_content_detail}>
               {item.text.split("\n").map((line, index) => {
                 return (
