@@ -142,9 +142,10 @@ export function BoardItem({ boardCategory, item, imgClick }) {
             <div className={styles.post_content_title}>
               <span>{item.title}</span>
               <span className={styles.post_comment_count}>
-                {commentsData?.length === 0
-                  ? null
-                  : `[${commentsData?.length}]`}
+                {commentsData &&
+                  (commentsData?.length === 0
+                    ? null
+                    : `[${commentsData?.length}]`)}
               </span>
             </div>
             <p className={styles.post_content_detail}>
