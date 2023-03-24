@@ -1,0 +1,264 @@
+.cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 680px;
+  max-width: 680px;
+  margin-left: 300px;
+  margin: 40px auto;
+}
+
+@media (max-width: 1024px) {
+  .cont {
+    min-width: 484px;
+    max-width: 484px;
+    margin: 136px auto;
+    margin-left: none;
+  }
+}
+
+.write_btn_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 20px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-bottom: 30px;
+  box-shadow: 3px 3px 5px rgba(50, 50, 50, 0.1);
+}
+
+.write_btn_container button {
+  width: 100%;
+  border: none;
+  border-radius: 40px;
+  padding: 10px;
+  font-size: 1.5em;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.content_list {
+  width: 100%;
+  -webkit-padding-start: 0px;
+}
+
+.content_list li {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0px 3px 5px rgba(50, 50, 50, 0.1);
+  padding: 5px 0px;
+}
+.content_list li + li {
+  margin: 20px 0;
+}
+
+.li_container {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.post {
+  width: 100%;
+}
+
+.post_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  padding: 5px 20px 5px 20px;
+}
+
+.post_header_left {
+  display: flex;
+  align-items: center;
+}
+
+.post_writer {
+  margin-right: 15px;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.post_category {
+  font-size: 0.9em;
+  color: rgba(0, 0, 0, 0.5);
+  margin-right: 15px;
+}
+
+.post_createdTime {
+  font-size: 0.9em;
+}
+
+.post_optionBtn {
+  position: relative;
+  display: flex;
+  border: none;
+  padding: 7px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.post_optionBtn:hover {
+  background-color: #f0f0f0;
+}
+
+.post_optionBtn_list {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 140px;
+  padding: 10px;
+  top: 25px;
+  right: 15px;
+  background-color: #e5e5e5;
+  border-radius: 8px;
+  border-top-right-radius: 0px;
+  box-shadow: 5px 3px 5px rgba(50, 50, 50, 0.5);
+}
+
+.post_optionBtn_list div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  font-size: 1.1em;
+}
+
+.post_optionBtn_list div:hover {
+  background-color: #ccc;
+}
+
+.post_content_title {
+  width: 100%;
+  font-size: 1.3em;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.post_content_detail {
+  font-size: 1em;
+  padding: 0px 20px;
+  line-height: 1.5;
+  word-break: break-all;
+}
+
+.post_image {
+  width: 100%;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.btn button {
+  background-color: white;
+  border: none;
+  color: black;
+  font-size: 20px;
+}
+
+.editForm textarea:first-child {
+  width: 100%;
+  border-bottom: 1px solid black;
+  font-size: 1.3em;
+  word-break: break-all;
+  margin-bottom: 5px;
+  overflow-y: auto;
+}
+
+.editForm textarea:nth-child(2) {
+  height: 150px;
+  width: 100%;
+  padding: 5px;
+  border-bottom: 1px solid black;
+  font-size: 1.3em;
+  word-break: break-all;
+  margin-bottom: 5px;
+  overflow-y: auto;
+}
+
+.editForm button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3px 8px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(220, 220, 220);
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+}
+
+.bigImg {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  width: 50%;
+  height: auto;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  border-radius: 8px;
+  z-index: 100;
+  background-color: #484646;
+  overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .bigImg {
+    width: 100%;
+    top: 50%;
+  }
+}
+
+.bigImg img {
+  width: 100%;
+  z-index: 101;
+}
+
+.closeBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 102;
+  font-size: 30px;
+  margin: 10px;
+}
+
+.closeBtn :hover {
+  color: rgba(0, 0, 0, 0.5);
+}
+.closeBtn :active {
+  color: rgba(255, 0, 0, 1);
+}
+
+.modal-open {
+  overflow: hidden;
+}

@@ -9,6 +9,9 @@ import styles from "./App.module.css";
 import Info from "./pages/info/Info";
 import Free from "./pages/free/Free";
 import Quest from "./pages/quest/Quest";
+import Profile from "./pages/mypage/Profile";
+import MyPosts from "./pages/mypage/MyPosts";
+import LikePosts from "./pages/mypage/LikePosts";
 
 function App() {
   const { isAuthReady, user } = useAuthContext();
@@ -64,6 +67,38 @@ function App() {
                   }
                 >
                   <Route path="/quest/img/:Id" element={<Quest />}></Route>
+                </Route>
+                <Route
+                  path="/mypage/profile"
+                  element={
+                    user ? <Profile /> : <Navigate replace={true} to="/login" />
+                  }
+                ></Route>
+                <Route
+                  path="/mypage/my-posts"
+                  element={
+                    user ? <MyPosts /> : <Navigate replace={true} to="/login" />
+                  }
+                >
+                  <Route
+                    path="/mypage/my-posts/img/:Id"
+                    element={<MyPosts />}
+                  ></Route>
+                </Route>
+                <Route
+                  path="/mypage/liked-posts"
+                  element={
+                    user ? (
+                      <LikePosts />
+                    ) : (
+                      <Navigate replace={true} to="/login" />
+                    )
+                  }
+                >
+                  <Route
+                    path="/mypage/liked-posts/img/:Id"
+                    element={<LikePosts />}
+                  ></Route>
                 </Route>
               </Routes>
             </div>

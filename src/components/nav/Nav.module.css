@@ -9,6 +9,7 @@
   background-color: #f9fafc;
   border-right: 1px solid #e6e6e6;
   font-size: 1em;
+  z-index: 999;
 }
 
 @media (max-width: 1024px) {
@@ -43,13 +44,28 @@
 }
 
 @media (max-width: 1024px) {
+  .nav_menu_li {
+    text-align: center;
+  }
   .nav_menu_li_click {
     text-align: center;
     border-bottom: 4px solid #1e3799;
     border-right: none;
   }
-  .nav_menu_li {
+  .nav_mymenu_container {
+    position: absolute;
+    top: 48px;
+    right: 0;
+    width: 110px;
+  }
+  .nav_mymenu_li {
     text-align: center;
+  }
+  .nav_mymenu_li_click {
+    text-align: center;
+    background-color: red;
+    border-bottom: 4px solid #1e3799;
+    border-right: none;
   }
 }
 
@@ -63,6 +79,49 @@
 
 .nav_menu_li:hover {
   background-color: #f4f4f5;
+}
+
+.nav_mymenu {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  width: 100%;
+  padding: 15px;
+  border-bottom: 1px solid rgba(1, 1, 1, 0.3);
+  color: black;
+}
+
+.nav_mymenu:hover {
+  background-color: #f4f4f5;
+}
+
+.nav_mymenu_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav_mymenu_li {
+  width: 100%;
+  padding: 15px;
+  border-top: 1px solid rgba(1, 1, 1, 0.3);
+  border-bottom: 1px solid rgba(1, 1, 1, 0.3);
+  color: #999999;
+  z-index: 999;
+}
+
+.nav_mymenu_li_click {
+  width: 100%;
+  padding: 15px;
+  background-color: #f4f4f5;
+  border-bottom: 1px solid rgba(1, 1, 1, 0.3);
+  border-right: 4px solid #1e3799;
+  color: #1e3799;
+  font-weight: 500;
+  z-index: 999;
+}
+
+.nav_mymenu_li:hover {
+  color: black;
 }
 
 .userName {
