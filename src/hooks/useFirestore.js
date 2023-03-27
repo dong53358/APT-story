@@ -71,6 +71,23 @@ export const useFirestore = (transaction) => {
     }
   };
 
+  // user 컬렉션에 user 정보 저장
+  const addUserNickname = async (email, uid, displayName) => {
+    dispatch({ type: "isPending" });
+    try {
+      const createdTime = timestamp.fromDate(new Date());
+      const docRef = await addDoc(colRef, {
+        email,
+        uid,
+        displayName,
+        createdTime,
+      });
+      dispatch({ type: "addDoc", payload: docRef });
+    } catch (error) {
+      dispatch({ type: "error", payload: error.message });
+    }
+  };
+
   // 컬렉션에서 문서를 제거합니다.
   const deleteDocument = async (id) => {
     dispatch({ type: "isPending" });
@@ -149,6 +166,7 @@ export const useFirestore = (transaction) => {
 
   return {
     addDocument,
+    addUserNickname,
     deleteDocument,
     updateDocument,
     updateDocument_img,

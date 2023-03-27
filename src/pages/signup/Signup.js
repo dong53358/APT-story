@@ -6,22 +6,45 @@ import { Link } from "react-router-dom";
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
   const [displayName, setDisplayName] = useState("");
+  const [isNicknameAvailability, setIsNicknameAvailability] = useState(false);
   const { error, isPending, signup } = useSignup();
 
   const handleData = (event) => {
     if (event.target.type === "email") {
       setEmail(event.target.value);
-    } else if (event.target.type === "password") {
+    } else if (event.target.id === "myPassWord") {
       setPassword(event.target.value);
+    } else if (event.target.id === "myPassWord2") {
+      setPassword2(event.target.value);
     } else if (event.target.type === "text") {
       setDisplayName(event.target.value);
     }
   };
 
+  const handleDuplicationClick = () => {
+    // 중복확인 함수 작성
+    // if(checkNicknameAvailability(displayName)){
+    // 중복 시
+    // setIsNicknameAvailability(false);
+    // }else{
+    // 중복 아닐 시
+    // setIsNicknameAvailability(true);
+    // }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    signup(email, password, displayName);
+    if (password === password2) {
+      signup(email, password, displayName);
+    } else {
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+    // if (!isNicknameAvailability) {
+    //   alert("동일한 닉네임이 있습니다.\n다른 닉네임을 입력해주세요.");
+    // }
   };
 
   return (
@@ -51,13 +74,26 @@ export default function Signup() {
               onChange={handleData}
             />
             <input
-              type="text"
-              id="myNickName"
+              type="password"
+              id="myPassWord2"
               required
-              placeholder="닉네임"
-              value={displayName}
+              placeholder="비밀번호 확인"
+              value={password2}
               onChange={handleData}
             />
+            <div className={styles.nickName_container}>
+              <input
+                type="text"
+                id="myNickName"
+                required
+                placeholder="닉네임"
+                minLength="2"
+                maxLength="12"
+                value={displayName}
+                onChange={handleData}
+              />
+              <button onClick={handleDuplicationClick}>중복확인</button>
+            </div>
           </div>
 
           <button type="submit" className="btn">
