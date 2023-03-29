@@ -18,6 +18,73 @@
   }
 }
 
+.profile_container {
+  display: flex;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 50px;
+}
+
+.profile_img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 150px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile_account {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+}
+
+.profile_account_displayName {
+  width: 100px;
+  font-size: 1.5em;
+}
+
+.profile_account_btn_container button {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.profile_account_btn {
+  background-color: #1e3799;
+  border: none;
+  color: white;
+  padding: 8px 13px;
+  border-radius: 8px;
+}
+
+.profile_account_btn span {
+  margin-right: 5px;
+}
+
+.password_edit_form_container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.password_edit_form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid #ccc;
+}
+
 .write_btn_container {
   display: flex;
   justify-content: center;
@@ -261,4 +328,69 @@
 
 .modal-open {
   overflow: hidden;
+}
+
+.profile_edit_form_container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 50px;
+}
+
+.profile_edit_form_container form:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile_edit_form_container label {
+  font-size: 1.5em;
+}
+
+.profile_edit_form_container button {
+  background-color: #1e3799;
+  border: none;
+  color: white;
+  padding: 8px 13px;
+  border-radius: 8px;
+  width: 100px;
+}
+
+.profile_previewImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile_nickname_edit_form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile_nickname_edit_form button {
+  margin-left: 10px;
+}
+
+.profile_nickname_edit_form div:first-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile_nickname_edit_form input {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.nickname_form_error {
+  color: red;
 }

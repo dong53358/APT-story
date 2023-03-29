@@ -76,11 +76,17 @@ export const useFirestore = (transaction) => {
     dispatch({ type: "isPending" });
     try {
       const createdTime = timestamp.fromDate(new Date());
+
+      const imageUrl =
+        "https://firebasestorage.googleapis.com/v0/b/mydiary-50193.appspot.com/o/images%2FuserImg.jpeg?alt=media&token=a92108c4-84d6-4acc-8c09-06ba66d10646";
+      const imgName = "userImg.jpeg";
       const docRef = await addDoc(colRef, {
         email,
         uid,
         displayName,
         createdTime,
+        imageUrl,
+        imgName,
       });
       dispatch({ type: "addDoc", payload: docRef });
     } catch (error) {
@@ -151,6 +157,33 @@ export const useFirestore = (transaction) => {
     }
   };
 
+  // user 컬렉션 문서에 imageUrl 필드를 추가합니다..
+  const updateUserDataImg = async (id, imageUrl, imgName) => {
+    dispatch({ type: "isPending" });
+    try {
+      const docRef = await updateDoc(doc(colRef, id), {
+        imageUrl: imageUrl,
+        imgName: imgName,
+      });
+      dispatch({ type: "updateDoc", payload: docRef });
+    } catch (error) {
+      dispatch({ type: "error", payload: error.message });
+    }
+  };
+
+  // user 컬렉션 문서의 nickname 을 수정합니다.
+  const updateUserDataNickname = async (id, displayName) => {
+    dispatch({ type: "isPending" });
+    try {
+      const docRef = await updateDoc(doc(colRef, id), {
+        displayName: displayName,
+      });
+      dispatch({ type: "updateDoc", payload: docRef });
+    } catch (error) {
+      dispatch({ type: "error", payload: error.message });
+    }
+  };
+
   // 좋아요 버튼 클릭한 사용자 추가
   const updateLikeList = async (id, likeList) => {
     dispatch({ type: "isPending" });
@@ -171,6 +204,8 @@ export const useFirestore = (transaction) => {
     updateDocument,
     updateDocument_img,
     updateComment,
+    updateUserDataNickname,
+    updateUserDataImg,
     updateLikeList,
     response,
   };

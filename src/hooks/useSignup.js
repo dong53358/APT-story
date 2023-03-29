@@ -41,5 +41,6 @@ export const useSignup = () => {
         setIspending(false);
       });
   };
+
   return { error, isPending, signup };
 };
