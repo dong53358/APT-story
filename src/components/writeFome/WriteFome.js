@@ -31,7 +31,7 @@ export default function WriteFome({
     }
   }, [response.success]);
 
-  const handleDate = (event) => {
+  const handleChange = (event) => {
     if (event.target.id === "tit") {
       setTitle(event.target.value);
     } else if (event.target.id === "txt") {
@@ -133,7 +133,7 @@ export default function WriteFome({
             id="tit"
             type="text"
             required
-            onChange={handleDate}
+            onChange={handleChange}
             maxLength="50"
             placeholder="제목"
           />
@@ -142,7 +142,7 @@ export default function WriteFome({
             id="txt"
             type="text"
             required
-            onChange={handleDate}
+            onChange={handleChange}
             placeholder="내용"
           ></textarea>
           <input
@@ -150,7 +150,7 @@ export default function WriteFome({
             type="file"
             id="file"
             accept="image/*"
-            onChange={handleDate}
+            onChange={handleChange}
           />
           {previewImg && (
             <img src={previewImg} alt="preview" className={styles.previewImg} />
