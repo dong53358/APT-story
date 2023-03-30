@@ -1,10 +1,4 @@
-import React, {
-  Component,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { v4 } from "uuid";
 import styles from "./MyPage.module.css";
@@ -18,13 +12,13 @@ import {
 } from "firebase/storage";
 import { appAuth, storage } from "../../firebase/config";
 import { useFirestore } from "../../hooks/useFirestore";
-import { updateProfile } from "firebase/auth";
+import { updatePassword, updateProfile } from "firebase/auth";
 import checkNicknameValid from "../../utils/checkNicknameValid";
 
 const Profile = () => {
   const { user } = useAuthContext();
-  const { documents: usersData, error2 } = useCollection("user");
-  const { documents: userData, error } = useCollection("user", [
+  const { documents: usersData } = useCollection("user");
+  const { documents: userData } = useCollection("user", [
     "uid",
     "==",
     user.uid,
@@ -60,6 +54,24 @@ const Profile = () => {
       setProfileImgFile(event.target.files[0]);
     } else if (event.target.id === "nickname") {
       setNickname(event.target.value);
+    }
+  };
+
+  const handlePasswordChangeSubmit = async (event) => {
+    event.preventDefault();
+    if (password === password2) {
+      await updatePassword(user, password)
+        .then(() => {
+          alert("비밀번호가 변경되었습니다.");
+          setPassword("");
+          setPassword2("");
+          setIsPasswordEditMode(false);
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    } else {
+      alert("비밀번호가 일치하지 않습니다.");
     }
   };
 
@@ -164,8 +176,10 @@ const Profile = () => {
       </div>
       {isPasswordEditMode && (
         <div className={styles.password_edit_form_container}>
-          {error && <div>{error}</div>}
-          <form>
+          <form
+            className={styles.password_edit_form}
+            onSubmit={handlePasswordChangeSubmit}
+          >
             <div>
               <label>비밀번호 </label>
               <input
@@ -183,7 +197,8 @@ const Profile = () => {
                 onChange={handleChange}
                 value={password2}
               />
-
+            </div>
+            <div>
               <button type="submit">비밀번호 수정</button>
             </div>
           </form>

@@ -75,19 +75,44 @@
 }
 
 .password_edit_form_container {
-  display: flex;
-  flex-direction: column;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid #ccc;
   border-radius: 10px;
-  padding: 10px;
+  padding: 50px;
 }
 
 .password_edit_form {
   display: flex;
   flex-direction: column;
-  width: 100%;
+}
+
+.password_edit_form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.password_edit_form label {
+  font-size: 1.5em;
+}
+
+.password_edit_form input {
+  font-size: 1.5em;
   border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.password_edit_form button {
+  background-color: #1e3799;
+  border: none;
+  color: white;
+  padding: 8px 13px;
+  border-radius: 8px;
+  width: 100%;
+  margin-top: 10px;
 }
 
 .write_btn_container {
