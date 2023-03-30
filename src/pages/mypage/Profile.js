@@ -36,11 +36,19 @@ const Profile = () => {
   const [isNicknameAvailability, setIsNicknameAvailability] = useState("");
 
   const handlePasswordEditModeChange = () => {
+    if (userData.length === 0) {
+      alert("소셜 로그인 계정은 비밀번호를 변경하실수 없습니다.");
+      return;
+    }
     setIsPasswordEditMode((prev) => !prev);
     setIsProfileEditMode(false);
   };
 
   const handleProfileEditModeChange = () => {
+    if (userData.length === 0) {
+      alert("소셜 로그인 계정은 프로필을 변경하실수 없습니다.");
+      return;
+    }
     setIsProfileEditMode((prev) => !prev);
     setIsPasswordEditMode(false);
   };
@@ -84,8 +92,8 @@ const Profile = () => {
 
       await uploadBytes(imageRef, profileImgFile);
       imageUrl = await getDownloadURL(imageRef);
-      updateUserDataImg(userData[0].id, imageUrl, imgName);
-      updateProfile(appAuth.currentUser, { photoURL: imageUrl });
+      await updateUserDataImg(userData[0].id, imageUrl, imgName);
+      await updateProfile(appAuth.currentUser, { photoURL: imageUrl });
     } else {
       const desertRef = ref(storage, `images/${userData[0].imgName}`);
       deleteObject(desertRef);
@@ -96,9 +104,12 @@ const Profile = () => {
 
       await uploadBytes(imageRef, profileImgFile);
       imageUrl = await getDownloadURL(imageRef);
-      updateUserDataImg(userData[0].id, imageUrl, imgName);
-      updateProfile(appAuth.currentUser, { photoURL: imageUrl });
+      await updateUserDataImg(userData[0].id, imageUrl, imgName);
+      await updateProfile(appAuth.currentUser, { photoURL: imageUrl });
     }
+    alert("프로필이 변경되었습니다.");
+    // eslint-disable-next-line no-restricted-globals
+    location.reload();
   };
 
   const handleDuplicationClick = () => {
@@ -119,7 +130,6 @@ const Profile = () => {
     }
     await updateUserDataNickname(userData[0].id, nickname);
     await updateProfile(appAuth.currentUser, { displayName: nickname });
-
     alert("닉네임이 변경되었습니다.");
     setIsProfileEditMode(false);
   };
@@ -146,7 +156,7 @@ const Profile = () => {
     <div className={styles.cont}>
       <div className={styles.profile_container}>
         <div className={styles.profile_img}>
-          {userData && <img src={userData[0]?.imageUrl} alt="profileImg" />}
+          {<img src={user.photoURL} alt="profileImg" />}
         </div>
         <div className={styles.profile_account}>
           <div className={styles.profile_account_displayName}>
@@ -187,6 +197,8 @@ const Profile = () => {
                 id="password"
                 onChange={handleChange}
                 value={password}
+                required
+                minLength="6"
               />
             </div>
             <div>
@@ -196,6 +208,8 @@ const Profile = () => {
                 id="password2"
                 onChange={handleChange}
                 value={password2}
+                required
+                minLength="6"
               />
             </div>
             <div>
