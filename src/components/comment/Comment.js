@@ -49,7 +49,12 @@ export function Comment({ user, comment }) {
     <div className={styles.comment_container}>
       <div className={styles.comment_header}>
         <div className={styles.comment_header_left}>
-          <div className={styles.comment_writer}>{comment.displayName}</div>
+          <div className={styles.comment_writer}>
+            <div className={styles.comment_writer_profileImg}>
+              <img src={comment.photoURL} alt="profileImg" />
+            </div>
+            <div>{comment.displayName}</div>
+          </div>
           <div className={styles.comment_createdTime}>
             {timeConversion(comment.createdTime)}
           </div>

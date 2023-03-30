@@ -21,8 +21,33 @@
   text-decoration: none;
 }
 
+.userInfo {
+  display: flex;
+  align-items: center;
+}
+
 .userName {
+  display: flex;
+  align-items: center;
   color: white;
+}
+
+.profileImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+.profileImg img {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
 }
 
 .header button {

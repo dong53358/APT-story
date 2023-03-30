@@ -20,6 +20,7 @@ export function Comments({ commentsData, boardId, error }) {
       content: comment,
       displayName: user.displayName,
       uid: user.uid,
+      photoURL: user.photoURL,
       boardId: boardId,
     });
   };

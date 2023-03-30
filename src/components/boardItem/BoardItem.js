@@ -76,7 +76,10 @@ export function BoardItem({ boardCategory, item, imgClick }) {
           <div className={styles.post_header}>
             <div className={styles.post_header_left}>
               <div className={styles.post_writer}>
-                작성자 : {item.displayName}
+                <div className={styles.post_writer_profileImg}>
+                  <img src={item.photoURL} alt="profileImg" />
+                </div>
+                <div>{item.displayName}</div>
               </div>
               <div className={styles.post_category}>{item.category}</div>
               <div className={styles.post_createdTime}>
@@ -142,9 +145,10 @@ export function BoardItem({ boardCategory, item, imgClick }) {
             <div className={styles.post_content_title}>
               <span>{item.title}</span>
               <span className={styles.post_comment_count}>
-                {commentsData?.length === 0
-                  ? null
-                  : `[${commentsData?.length}]`}
+                {commentsData &&
+                  (commentsData?.length === 0
+                    ? null
+                    : `[${commentsData?.length}]`)}
               </span>
             </div>
             <p className={styles.post_content_detail}>

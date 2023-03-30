@@ -52,27 +52,11 @@
   font-size: 1em;
   padding: 14px;
   border-radius: 5px;
-}
-
-.signup_form_inputContainer input:first-child {
-  width: 100%;
-  font-size: 1em;
   margin-bottom: 10px;
-}
-
-.signup_form_inputContainer input:nth-child(2) {
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.signup_form_inputContainer input:nth-child(3) {
-  width: 100%;
-  font-size: 1em;
 }
 
 .signup_form button {
   width: 100%;
-  margin-top: 30px;
   margin-bottom: 5px;
   float: right;
   padding: 15px 0px;
@@ -85,6 +69,28 @@
   cursor: pointer;
 }
 
+.nickName_container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.nickName_container input {
+  width: 100%;
+  margin-right: 10px;
+}
+
+.nickName_container button {
+  width: 100px;
+  height: 50px;
+  background-color: #f0f2f5;
+  border: 1px solid #ccc;
+  color: black;
+  font-size: 1em;
+  font-weight: 400;
+  padding: 10px;
+}
+
 .signup_form_error {
   color: red;
   font-size: 1em;
@@ -94,7 +100,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  margin: 30px auto;
   background-color: #f0f2f5;
   border: 1px solid #ccc;
   border-radius: 5px;

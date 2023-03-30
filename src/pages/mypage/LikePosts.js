@@ -1,45 +1,40 @@
-import React from "react";
-import styles from "./Free.module.css";
-
+import { AnimatePresence, useScroll, motion } from "framer-motion";
+import React, { useState } from "react";
+import { FaWindowClose } from "react-icons/fa";
 import { useMatch, useNavigate } from "react-router-dom";
+import BoardList from "../../components/boardList/BoardList";
+import Modal from "../../components/modal/Modal";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
-import { AnimatePresence, motion, useScroll } from "framer-motion";
-import { useState } from "react";
-import { FaWindowClose } from "react-icons/fa";
-import Modal from "../../components/modal/Modal";
-import BoardList from "../../components/boardList/BoardList";
 
-export default function Free() {
+import styles from "./MyPage.module.css";
+
+const LikePosts = () => {
   const { user } = useAuthContext();
   const boardCategory = "자유";
-  const { documents: freeBoardData, error } = useCollection("board", [
-    "category",
-    "==",
-    boardCategory,
+  const { documents: likedPostsData, error } = useCollection("board", [
+    "likeList",
+    "array-contains",
+    user.uid,
   ]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
-  const imgMatch = useMatch(`/free/img/:imgId`);
+  const imgMatch = useMatch(`/mypage/liked-posts/img/:Id`);
   const navigate = useNavigate();
   const { scrollY } = useScroll();
 
   const imgClick = (imgId, imgUrl) => {
     setImgUrl(imgUrl);
-    navigate(`/free/img/${imgId}`);
+    navigate(`/mypage/liked-posts/img/${imgId}`);
     document.body.classList.add(styles["modal-open"]);
   };
   const onOverlayClick = () => {
     document.body.classList.remove(styles["modal-open"]);
-    navigate("/free");
+    navigate("/mypage/liked-posts");
   };
   const closeBtnClick = () => {
     document.body.classList.remove(styles["modal-open"]);
-    navigate("/free");
-  };
-  const handleModalOpen = () => {
-    setIsModalOpen(true);
-    document.body.classList.add(styles["modal-open"]);
+    navigate("/mypage/liked-posts");
   };
   const handleModalClose = () => {
     setIsModalOpen(false);
@@ -49,15 +44,12 @@ export default function Free() {
   return (
     <>
       <main className={styles.cont}>
-        <div className={styles.write_btn_container}>
-          <button onClick={handleModalOpen}>글쓰기</button>
-        </div>
         <ul className={styles.content_list}>
           {error && <strong>{error}</strong>}
-          {freeBoardData && (
+          {likedPostsData && (
             <BoardList
               boardCategory={boardCategory}
-              boardData={freeBoardData}
+              boardData={likedPostsData}
               imgClick={imgClick}
             />
           )}
@@ -70,7 +62,6 @@ export default function Free() {
           handleModalClose={handleModalClose}
           uid={user.uid}
           displayName={user.displayName}
-          photoURL={user.photoURL}
         />
       )}
       <AnimatePresence>
@@ -100,4 +91,6 @@ export default function Free() {
       </AnimatePresence>
     </>
   );
-}
+};
+
+export default LikePosts;

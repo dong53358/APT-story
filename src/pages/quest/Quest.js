@@ -70,6 +70,7 @@ export default function Quest() {
           handleModalClose={handleModalClose}
           uid={user.uid}
           displayName={user.displayName}
+          photoURL={user.photoURL}
         />
       )}
       <AnimatePresence>

@@ -18,10 +18,30 @@
 }
 
 .comment_writer {
-  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
   margin-right: 10px;
   font-size: 1.1em;
   font-weight: bold;
+}
+
+.comment_writer_profileImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+.comment_writer_profileImg img {
+  height: 30px;
+  width: 30px;
+  object-fit: cover;
 }
 
 .comment_createdTime {
