@@ -64,6 +64,7 @@ export default function Home() {
           handleModalClose={handleModalClose}
           uid={user.uid}
           displayName={user.displayName}
+          photoURL={user.photoURL}
         />
       )}
       <AnimatePresence>

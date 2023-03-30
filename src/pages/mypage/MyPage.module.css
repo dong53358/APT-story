@@ -37,6 +37,11 @@
   border-radius: 50%;
   overflow: hidden;
 }
+.profile_img img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
 
 .profile_account {
   display: flex;
@@ -368,6 +373,12 @@
   border: 1px solid #ccc;
   border-radius: 50%;
   overflow: hidden;
+}
+
+.profile_previewImg img {
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
 }
 
 .profile_nickname_edit_form {

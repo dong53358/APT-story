@@ -23,9 +23,29 @@
 }
 
 .post_writer {
+  display: flex;
+  align-items: center;
   margin-right: 15px;
   font-size: 1.1em;
   font-weight: bold;
+}
+
+.post_writer_profileImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.post_writer_profileImg img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
 }
 
 .post_category {

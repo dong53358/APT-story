@@ -49,7 +49,6 @@ const Profile = () => {
   const handleProfileEditModeChange = () => {
     setIsProfileEditMode((prev) => !prev);
     setIsPasswordEditMode(false);
-    console.log(userData);
   };
 
   const handleChange = (event) => {
@@ -74,6 +73,7 @@ const Profile = () => {
       await uploadBytes(imageRef, profileImgFile);
       imageUrl = await getDownloadURL(imageRef);
       updateUserDataImg(userData[0].id, imageUrl, imgName);
+      updateProfile(appAuth.currentUser, { photoURL: imageUrl });
     } else {
       const desertRef = ref(storage, `images/${userData[0].imgName}`);
       deleteObject(desertRef);
@@ -85,6 +85,7 @@ const Profile = () => {
       await uploadBytes(imageRef, profileImgFile);
       imageUrl = await getDownloadURL(imageRef);
       updateUserDataImg(userData[0].id, imageUrl, imgName);
+      updateProfile(appAuth.currentUser, { photoURL: imageUrl });
     }
   };
 

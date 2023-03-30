@@ -16,9 +16,15 @@ export default function Header() {
         </h1>
         <ul className={styles.list_nav}>
           {user && (
-            <li>
+            <li className={styles.userInfo}>
               <strong className={styles.userName}>
-                환영합니다 {user.displayName} 님
+                <Link to={"/mypage/profile"}>
+                  <div className={styles.profileImg}>
+                    <img src={user.photoURL} alt="profileImg" />
+                  </div>
+                </Link>
+
+                <div>{user.displayName}</div>
               </strong>
               <button type="button" onClick={logout}>
                 로그아웃

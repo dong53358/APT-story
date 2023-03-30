@@ -7,6 +7,7 @@ const Modal = ({
   type,
   uid,
   displayName,
+  photoURL,
   handleModalClose,
   item,
 }) => {
@@ -18,6 +19,7 @@ const Modal = ({
           type={type}
           uid={uid}
           displayName={displayName}
+          photoURL={photoURL}
           handleModalClose={handleModalClose}
           item={item}
         ></WriteForm>

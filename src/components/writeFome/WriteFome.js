@@ -11,6 +11,7 @@ export default function WriteFome({
   type,
   uid,
   displayName,
+  photoURL,
   handleModalClose,
   item,
 }) {
@@ -46,7 +47,7 @@ export default function WriteFome({
     // add
     if (type === "ADD") {
       if (imageFile === "") {
-        addDocument({ uid, displayName, category, title, text });
+        addDocument({ uid, displayName, photoURL, category, title, text });
         handleModalClose();
         return;
       }
@@ -62,6 +63,7 @@ export default function WriteFome({
       addDocument({
         uid,
         displayName,
+        photoURL,
         category,
         title,
         text,

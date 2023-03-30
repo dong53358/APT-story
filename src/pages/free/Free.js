@@ -70,6 +70,7 @@ export default function Free() {
           handleModalClose={handleModalClose}
           uid={user.uid}
           displayName={user.displayName}
+          photoURL={user.photoURL}
         />
       )}
       <AnimatePresence>

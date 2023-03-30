@@ -76,7 +76,10 @@ export function BoardItem({ boardCategory, item, imgClick }) {
           <div className={styles.post_header}>
             <div className={styles.post_header_left}>
               <div className={styles.post_writer}>
-                작성자 : {item.displayName}
+                <div className={styles.post_writer_profileImg}>
+                  <img src={item.photoURL} alt="profileImg" />
+                </div>
+                <div>{item.displayName}</div>
               </div>
               <div className={styles.post_category}>{item.category}</div>
               <div className={styles.post_createdTime}>

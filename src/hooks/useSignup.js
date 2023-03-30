@@ -19,12 +19,12 @@ export const useSignup = () => {
     createUserWithEmailAndPassword(appAuth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-
         if (!user) {
           throw new Error("회원가입에 실패했습니다.");
         }
-
-        updateProfile(appAuth.currentUser, { displayName })
+        const photoURL =
+          "https://firebasestorage.googleapis.com/v0/b/mydiary-50193.appspot.com/o/images%2FuserImg.jpeg?alt=media&token=a92108c4-84d6-4acc-8c09-06ba66d10646";
+        updateProfile(appAuth.currentUser, { displayName, photoURL })
           .then(() => {
             addUserNickname(user.email, user.uid, user.displayName);
             dispatch({ type: "login", payload: user });

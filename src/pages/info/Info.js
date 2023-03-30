@@ -57,8 +57,10 @@ export default function Info() {
           {infoBoardData && (
             <BoardList
               boardCategory={boardCategory}
+              type="ADD"
               boardData={infoBoardData}
               imgClick={imgClick}
+              photoURL={user.photoURL}
             />
           )}
         </ul>
