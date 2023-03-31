@@ -57,10 +57,8 @@ export default function Info() {
           {infoBoardData && (
             <BoardList
               boardCategory={boardCategory}
-              type="ADD"
               boardData={infoBoardData}
               imgClick={imgClick}
-              photoURL={user.photoURL}
             />
           )}
         </ul>
@@ -72,6 +70,7 @@ export default function Info() {
           handleModalClose={handleModalClose}
           uid={user.uid}
           displayName={user.displayName}
+          photoURL={user.photoURL}
         />
       )}
       <AnimatePresence>
