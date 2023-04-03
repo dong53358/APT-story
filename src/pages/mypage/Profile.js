@@ -4,12 +4,7 @@ import { v4 } from "uuid";
 import styles from "./MyPage.module.css";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
-import {
-  getDownloadURL,
-  ref,
-  uploadBytes,
-  deleteObject,
-} from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { appAuth, storage } from "../../firebase/config";
 import { useFirestore } from "../../hooks/useFirestore";
 import { updatePassword, updateProfile } from "firebase/auth";
@@ -85,28 +80,14 @@ const Profile = () => {
 
   const handleProfileSubmit = async (event) => {
     event.preventDefault();
-    if (userData[0].imgName === "userImg.jpeg") {
-      const imgName = profileImgFile.name + v4();
-      const imageRef = ref(storage, `images/${imgName}`);
-      let imageUrl = "";
+    const imgName = profileImgFile.name + v4();
+    const imageRef = ref(storage, `images/${imgName}`);
+    let imageUrl = "";
 
-      await uploadBytes(imageRef, profileImgFile);
-      imageUrl = await getDownloadURL(imageRef);
-      await updateUserDataImg(userData[0].id, imageUrl, imgName);
-      await updateProfile(appAuth.currentUser, { photoURL: imageUrl });
-    } else {
-      const desertRef = ref(storage, `images/${userData[0].imgName}`);
-      deleteObject(desertRef);
-
-      const imgName = profileImgFile.name + v4();
-      const imageRef = ref(storage, `images/${imgName}`);
-      let imageUrl = "";
-
-      await uploadBytes(imageRef, profileImgFile);
-      imageUrl = await getDownloadURL(imageRef);
-      await updateUserDataImg(userData[0].id, imageUrl, imgName);
-      await updateProfile(appAuth.currentUser, { photoURL: imageUrl });
-    }
+    await uploadBytes(imageRef, profileImgFile);
+    imageUrl = await getDownloadURL(imageRef);
+    await updateUserDataImg(userData[0].id, imageUrl, imgName);
+    await updateProfile(appAuth.currentUser, { photoURL: imageUrl });
     dispatch({ type: "profileImgChange", payload: user });
     alert("프로필이 변경되었습니다.");
   };
