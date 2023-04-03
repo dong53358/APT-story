@@ -106,13 +106,14 @@ export const useFirestore = (transaction) => {
   };
 
   // 컬렉션에서 문서를 수정합니다.
-  const updateDocument = async (id, title, text, category) => {
+  const updateDocument = async (id, title, text, category, photoURL) => {
     dispatch({ type: "isPending" });
     try {
       const docRef = await updateDoc(doc(colRef, id), {
         title: title,
         text: text,
         category: category,
+        photoURL: photoURL,
       });
       dispatch({ type: "updateDoc", payload: docRef });
     } catch (error) {
@@ -127,7 +128,8 @@ export const useFirestore = (transaction) => {
     text,
     category,
     imageUrl,
-    imgName
+    imgName,
+    photoURL
   ) => {
     dispatch({ type: "isPending" });
     try {
@@ -137,6 +139,7 @@ export const useFirestore = (transaction) => {
         category: category,
         imageUrl: imageUrl,
         imgName: imgName,
+        photoURL: photoURL,
       });
       dispatch({ type: "updateDoc", payload: docRef });
     } catch (error) {
@@ -145,11 +148,12 @@ export const useFirestore = (transaction) => {
   };
 
   // comments 컬렉션에서 문서를 수정합니다.
-  const updateComment = async (id, editComment) => {
+  const updateComment = async (id, editComment, photoURL) => {
     dispatch({ type: "isPending" });
     try {
       const docRef = await updateDoc(doc(colRef, id), {
         content: editComment,
+        photoURL: photoURL,
       });
       dispatch({ type: "updateDoc", payload: docRef });
     } catch (error) {

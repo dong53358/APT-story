@@ -19,7 +19,7 @@ export function Comment({ user, comment }) {
 
   const handleCommentSubmit = (event) => {
     event.preventDefault();
-    updateComment(comment.id, editComment);
+    updateComment(comment.id, editComment, user.photoURL);
     setIsEditClicked(false);
   };
 

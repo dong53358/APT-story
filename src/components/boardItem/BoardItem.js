@@ -210,6 +210,7 @@ export function BoardItem({ boardCategory, item, imgClick }) {
           displayName={user.displayName}
           handleModalClose={handleEditModalClose}
           item={item}
+          photoURL={user.photoURL}
         />
       )}
     </>
