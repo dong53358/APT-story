@@ -16,7 +16,7 @@ import { updatePassword, updateProfile } from "firebase/auth";
 import checkNicknameValid from "../../utils/checkNicknameValid";
 
 const Profile = () => {
-  const { user } = useAuthContext();
+  const { user, dispatch } = useAuthContext();
   const { documents: usersData } = useCollection("user");
   const { documents: userData } = useCollection("user", [
     "uid",
@@ -107,9 +107,8 @@ const Profile = () => {
       await updateUserDataImg(userData[0].id, imageUrl, imgName);
       await updateProfile(appAuth.currentUser, { photoURL: imageUrl });
     }
+    dispatch({ type: "profileImgChange", payload: user });
     alert("프로필이 변경되었습니다.");
-    // eslint-disable-next-line no-restricted-globals
-    location.reload();
   };
 
   const handleDuplicationClick = () => {
@@ -130,6 +129,7 @@ const Profile = () => {
     }
     await updateUserDataNickname(userData[0].id, nickname);
     await updateProfile(appAuth.currentUser, { displayName: nickname });
+    dispatch({ type: "displayNameChange", payload: user });
     alert("닉네임이 변경되었습니다.");
     setIsProfileEditMode(false);
   };
