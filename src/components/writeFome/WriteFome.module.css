@@ -50,7 +50,15 @@
 }
 
 .previewImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
+}
+
+.previewImg img {
+  width: 80%;
+  object-fit: cover;
 }
 
 .write_form button {

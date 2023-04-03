@@ -1,4 +1,9 @@
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from "firebase/storage";
 import { useEffect, useState } from "react";
 import { storage } from "../../firebase/config";
 import { useFirestore } from "../../hooks/useFirestore";
@@ -69,17 +74,20 @@ export default function WriteFome({
         text,
         imageUrl,
         imgName,
-        // imageFile,
       });
       handleModalClose();
       return;
     }
     // update
     if (imageFile === "") {
-      updateDocument(item.id, title, text, category);
+      updateDocument(item.id, title, text, category, photoURL);
       handleModalClose();
       return;
     }
+
+    const desertRef = ref(storage, `images/${item.imgName}`);
+    if (item.imgName) deleteObject(desertRef);
+
     const imgName = imageFile.name + v4();
     const imageRef = ref(storage, `images/${imgName}`);
     let imageUrl = "";
@@ -87,16 +95,16 @@ export default function WriteFome({
     await uploadBytes(imageRef, imageFile);
 
     imageUrl = await getDownloadURL(imageRef);
+
     updateDocument_img(
       item.id,
       title,
       text,
       category,
       imageUrl,
-      imgName
-      // imageFile
+      imgName,
+      photoURL
     );
-
     handleModalClose();
   };
 
@@ -155,7 +163,9 @@ export default function WriteFome({
             onChange={handleChange}
           />
           {previewImg && (
-            <img src={previewImg} alt="preview" className={styles.previewImg} />
+            <div className={styles.previewImg}>
+              <img src={previewImg} alt="preview" />
+            </div>
           )}
           <button type="submit">등록</button>
         </fieldset>
